@@ -116,3 +116,13 @@ addBinary("11", "1") == "100" (valid)
   * I do not think it is worth implementing extra tests for those because I am using the `||` (short-circuiting OR) and it would not bring that much additional value in my opinion, as it is in the same condition.
 
 # Mutation Testing
+* After following the provided documentation, I ran: `mvn test-compile org.pitest:pitest-maven:mutationCoverage` and got:
+  * 22 / 23 (96%) Line coverage for mutated classes
+  * 28 / 30 Mutants killed (Mutation score 93%)
+  * 63 tests were run
+* Based on the report, the line that seems to cause problems was:
+```
+if (i+1 > Math.pow(10, 4) || j+1 > Math.pow(10, 4)) {
+```
+  * Changing the boundary will cause certain tests to pass, they should not.
+  * Unsure if it is worth changing this, because the bound is given by the requirement. So a mutant where the bound is intentionally changed seems rather odd. 
