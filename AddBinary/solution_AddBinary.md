@@ -108,3 +108,11 @@ addBinary("11", "1") == "100" (valid)
   * I also cross-checked and found this post on StackOverflow: https://stackoverflow.com/a/79507359 (Which is the current one I'm using, not the AI generated one!)
   * So I run `mvn clean test`, it creates the report, which I can then view and check.
 
+* Based on the report, I got 100% Line coverage and 86% Branch coverage on the `addBinary` method
+  * I assume I do not have to look at the class, just the method. As we only implement the tests for the method.
+  * As for the branches I missed, it turns out that I am not checking all cases, that is:
+    * a = null OR b = null OR a.isEmpty() OR b.isEmpty()
+    * i+1 > Math.pow(10,4) OR j+1 > Math.pow(10,4)
+  * I do not think it is worth implementing extra tests for those because I am using the `||` (short-circuiting OR) and it would not bring that much additional value in my opinion, as it is in the same condition.
+
+# Mutation Testing
