@@ -53,23 +53,52 @@ addBinary("11", "1") == "100" (valid)
 ```
 * T1: `"1" + "0" = "1" `
   * (Observation: all same length only possible if 0 is in input!)
-* T2: `"1" + "1" = "11" `
+* T2: `"1" + "1" = "10" `
 * T3.1: `"10" + "1" = "11"`
 * T3.2: `"1"  + "10" = "11"`
 * T3.3: `"11" + "1" = "100"`
   * Because addition is associative, maybe T3.1 and T3.2 do not have to be differentiated.
   * However, maybe the code has a dependency on what is right or left, so I keep it.
 * T4: `"" + "0" = Throw IllegalArgumentException`
-* T5: `"0" + (10**4 * "1") = Throw IllegalArgumentException`
+* T5: `"0" + ((10**4 * "1")+1) = Throw IllegalArgumentException`
   * I'm using Python string replication syntax, will look up how to do this for Java but for just test cases, should be fine.
   * I know what it means, just not how to implement it yet. 
-* T6:`"1" + ((10**4 - 1) * "1") = a 1 with (10*4 -1) 0s`
+* T6:`"1" + ((10**4) * "1") = 1 with (10*4 + 1) 0s`
   * T6 is special because requirements have only a restriction on `a` and `b`, not on `result`
   * So an output of length 10^4 should be allowed
 
+* For T4 - T5, I could do the same test with for the other direction, but I decided not too. 
+  * I assume that the bug if one side triggering the throw exception and the other not is unlikely.
+  * If the left or right side make a difference, it should be caught by T3.2
+
 **Step 6: Implement concrete test cases with JUnit tests**
+* I will not copy-paste my tests but mention what I decided to implement. 
+* T1 - T3 can be implemented with ParametrizedTests
+  * Prof. Baccheli showed in the lecture that CSV can be used a ssource, instead of implementing this verbose Stream and Method source as shown in the book. 
+  * I found a reference on how to implement it here: https://www.baeldung.com/parameterized-tests-junit-5
+* T4 - T6 will receive individual tests, as they are more about special edge cases. 
+  * While implementing T4, I noticed that empty string is not triggering the Exception I expected.
+  * The code checks for null, not empty string. So I decided to modify the code, because requirements refer to the length of the string but also add a test which checks for null strings.
+    * The null string check works but IDE will point out that this will not work. I keep the test since I cannot assume everyone uses the same IDE.
+
+* T6
+  * I found out how to do string duplication here: https://www.baeldung.com/java-string-of-repeated-characters 
+  * I noticed that we might as well test the boundary itself, not just beyond the boundary.
+  * Was trying to look into a way to replace the first char, opted for this approach: https://www.geeksforgeeks.org/java/swap-the-first-and-last-character-of-a-string-in-java/
+    * Just turn the long string into an array, then replace the first char.
+
+* Implemented Test cases
+  * T1 - T3 (Same as before)
+  * T4.1: `"0" + "" = Throw IllegalArgumentException`
+  * T4.2: `"0" + null = Throw IllegalArgumentException`
+  * T5: `"0" + "1" ** ((10**4)+1) = Throw IllegalArgumentException`
+  * T6.1: `"0" + "1" ** (10**4) = "1" ** (10**4)`
+  * T6.2: `"1" + "1" ** (10**4)` = 1 with (10^4 + 1) 0s
 
 **Step 7: Use creativity and experience to augment test suite**
-
+* T6.2 is somewhat of a magnum opus, as it truy checks if it is working correctly. However, I would also prefer to see cases such as:
+* `"1011" + "1" = "1100` (11 + 1 = 12)
+* `"101010" + "1000101" = "1101111"` (42 + 69 = 111)
+* These are more personal choices because they involve zeros and ones at different positions. Just to make sure that it also works for some choices.
 
 
