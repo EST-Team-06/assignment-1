@@ -124,5 +124,18 @@ addBinary("11", "1") == "100" (valid)
 ```
 if (i+1 > Math.pow(10, 4) || j+1 > Math.pow(10, 4)) {
 ```
-  * Changing the boundary will cause certain tests to pass, they should not.
-  * Unsure if it is worth changing this, because the bound is given by the requirement. So a mutant where the bound is intentionally changed seems rather odd. 
+* Changing the boundary will cause certain tests to pass, they should not.
+* Unsure if it is worth changing this, because the bound is given by the requirement. So a mutant where the bound is intentionally changed seems rather odd.
+* We can increase mutation coverage to 96% by doing:
+```
+int aLength = a.length();
+int bLength = b.length();
+int i = aLength - 1;
+int j = bLength - 1;
+
+if (aLength > Math.pow(10, 4) || bLength > Math.pow(10, 4)) {
+    throw new IllegalArgumentException("Input strings cannot be greater than 10^4");
+}
+```
+* By doing this, it prevents mutant from existing. The + cannot be replaced by "-" anymore. However, not sure if this is a good solution.
+* In my opinion, these two mutants are okay, as they shouldn't really occur in real life. 
