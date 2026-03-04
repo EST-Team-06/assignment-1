@@ -37,8 +37,20 @@ public class AddBinary {
             result.append(sum % 2);
             carry = sum / 2;
         }
+        result.append(carry);
+
+//        if (carry != 0) {
+//        result.append(carry);
+//        }
 
         return result.reverse().toString();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(addBinary("1", "1"));
+        System.out.println(addBinary("10", "1"));
+        System.out.println(addBinary("11", "1"));
+
     }
 
 }
