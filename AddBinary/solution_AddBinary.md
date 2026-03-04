@@ -96,9 +96,15 @@ addBinary("11", "1") == "100" (valid)
   * T6.2: `"1" + "1" ** (10**4)` = 1 with (10^4 + 1) 0s
 
 **Step 7: Use creativity and experience to augment test suite**
-* T6.2 is somewhat of a magnum opus, as it truy checks if it is working correctly. However, I would also prefer to see cases such as:
+* T6.2 is somewhat of a magnum opus, as it truly checks if it is working correctly. However, I would also prefer to see cases such as:
 * `"1011" + "1" = "1100` (11 + 1 = 12)
 * `"101010" + "1000101" = "1101111"` (42 + 69 = 111)
 * These are more personal choices because they involve zeros and ones at different positions. Just to make sure that it also works for some choices.
 
+# Specification-based testing
+* While reading the book chapters, I also implemented all code the author implemented and learned how to use JaCoCo that way with the help of AI. 
+  * I assume that I do not have report this as it was in the past and not specifically to solve this task.
+    * The prompt was along the lines of: Give me what I have to add to `prom.xml` to make JaCoCo work
+  * I also cross-checked and found this post on StackOverflow: https://stackoverflow.com/a/79507359 (Which is the current one I'm using, not the AI generated one!)
+  * So I run `mvn clean test`, it creates the report, which I can then view and check.
 

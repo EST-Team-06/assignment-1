@@ -1,5 +1,7 @@
 .idea/
 .idea/vcs.xml
+*/target/
+*/.jqwik-database
 
 # Compiled class file
 *.class

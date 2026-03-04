@@ -51,13 +51,13 @@ public class AddBinary {
         return result.reverse().toString();
     }
 
-    public static void main(String[] args) {
-        System.out.println(addBinary("1", "1"));
-        System.out.println(addBinary("10", "1"));
-        System.out.println(addBinary("11", "1"));
-        System.out.println(addBinary("", "0"));
-
-
-    }
+//    public static void main(String[] args) {
+//        System.out.println(addBinary("1", "1"));
+//        System.out.println(addBinary("10", "1"));
+//        System.out.println(addBinary("11", "1"));
+//        System.out.println(addBinary("", "0"));
+//
+//
+//    }
 
 }
