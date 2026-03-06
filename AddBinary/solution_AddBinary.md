@@ -101,7 +101,7 @@ addBinary("11", "1") == "100" (valid)
 * `"101010" + "1000101" = "1101111"` (42 + 69 = 111)
 * These are more personal choices because they involve zeros and ones at different positions. Just to make sure that it also works for some choices.
 
-# Specification-based testing
+# Structual testing
 * While reading the book chapters, I also implemented all code the author implemented and learned how to use JaCoCo that way with the help of AI. 
   * I assume that I do not have report this as it was in the past and not specifically to solve this task.
     * The prompt was along the lines of: Give me what I have to add to `prom.xml` to make JaCoCo work
