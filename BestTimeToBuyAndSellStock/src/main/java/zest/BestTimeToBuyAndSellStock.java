@@ -15,10 +15,22 @@ public class BestTimeToBuyAndSellStock {
             throw new IllegalArgumentException("Input array cannot be null or empty");
         }
 
-        int minPrice = 0;
+        if (prices.length > Math.pow(10, 5)) {
+            throw new IllegalArgumentException("Input array may not possess a length exceeding 10^5");
+        }
+
+        if (prices[0] < 0 || prices[0] > Math.pow(10, 4)) {
+            throw new IllegalArgumentException("Input array may not include prices lower than 0 or greater than 10^4");
+        }
+
+        int minPrice = prices[0];
+
         int maxProfit = 0;
 
         for (int i = 1; i < prices.length; i++) {
+            if (prices[i] < 0 || prices[i] > Math.pow(10, 4)) {
+                throw new IllegalArgumentException("Input array may not include prices lower than 0 or greater than 10^4");
+            }
 
             if (prices[i] < minPrice) {
                 minPrice = prices[i];
@@ -31,6 +43,12 @@ public class BestTimeToBuyAndSellStock {
         }
 
         return maxProfit;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(maxProfit(new int[]{5, 10, 15}));
+        System.out.println(maxProfit(new int[]{7, 1, 5, 3, 6, 4}));
+
     }
 
 }

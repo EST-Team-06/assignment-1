@@ -1,3 +1,9 @@
+# Ignore generated files
+.idea/codeStyles/
+**/.idea/
+**/.jqwik-database
+**/target
+
 # Compiled class file
 *.class
 
