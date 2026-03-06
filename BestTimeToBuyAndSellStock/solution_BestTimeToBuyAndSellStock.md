@@ -89,7 +89,7 @@
 * T11: `maxProfit([5, 4, 3, 1, 2]) == 1`
   * This should be covered by T2, I preferred having more than two values.
 
-## Structural testing
+# Structural testing
 * The Jacoco code was implemented based what seen in AddBinary
 * After running `mvn clean test`, I got 100% instruction coverage and 90% branch coverage
 * It seems that my tests somehow missed:
@@ -111,7 +111,7 @@
 * T5 checks only A=True,B=False and T8.81 only A=False,B=True.
 * Putting each condition in a different if statement may raise branch coverage but I do not believe it is that meaningful.
 
-## Mutation Testing
+# Mutation Testing
 * I ran: `mvn test-compile org.pitest:pitest-maven:mutationCoverage` and got
   * 94% Line coverage
   * 85% Mutation coverage
