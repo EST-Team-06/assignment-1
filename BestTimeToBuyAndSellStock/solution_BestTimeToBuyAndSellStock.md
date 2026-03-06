@@ -88,3 +88,45 @@
   * Still, I thought it would be worth checking just to be sure.
 * T11: `maxProfit([5, 4, 3, 1, 2]) == 1`
   * This should be covered by T2, I preferred having more than two values.
+
+## Structural testing
+* The Jacoco code was implemented based what seen in AddBinary
+* After running `mvn clean test`, I got 100% instruction coverage and 90% branch coverage
+* It seems that my tests somehow missed:
+  ```
+  if (prices[0] < 0 || prices[0] > Math.pow(10, 4)) {
+      throw new IllegalArgumentException("Input array may not include prices lower than 0 or greater than 10^4");
+  }
+  
+  if (prices[i] < 0 || prices[i] > Math.pow(10, 4)) {
+      throw new IllegalArgumentException("Input array may not include prices lower than 0 or greater than 10^4");
+  }
+  ```
+* This surprised me, as these cases should be covered by T5 and T8.1. 
+* The report mentions 1 of 4 branches missed, so I assume it is referring to all 4 cases for `(A || B)`
+  * A=True, B=True
+  * A=True, B=False
+  * A=False, B=True
+  * A=False, B=False
+* T5 checks only A=True,B=False and T8.81 only A=False,B=True.
+* Putting each condition in a different if statement may raise branch coverage but I do not believe it is that meaningful.
+
+## Mutation Testing
+* I ran: `mvn test-compile org.pitest:pitest-maven:mutationCoverage` and got
+  * 94% Line coverage
+  * 85% Mutation coverage
+  * Generated 20 mutants, killed 17
+* The 3 mutants that survived involved:
+``` 
+if (prices[0] < 0 || prices[0] > Math.pow(10, 4)) {
+
+if (prices[i] < minPrice) {
+
+if (profit > maxProfit) {
+```
+* I assume if certain operators are flipped, the tests will fail. 
+* In all cases, PitTest reports that changing conditional boundary did not trigger test failures.
+* For the condition wit `minPrice` and `maxPrice`, changing the condition indeed does not have an impact and I think that is fine.
+  * The only consequence would be a re-assignment but the method behaves correctly.
+* Changing the conditional boundary for lower and upper limit will make cases where 0 and 10^4 are used fail in a single element list fail.
+  * This should indeed not happen. However, since single element lists always return 0 and this is tested, I think it is actually fine.
