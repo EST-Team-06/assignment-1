@@ -27,14 +27,20 @@ public class CompareVersionNumbers {
             int num1 = (i < v1Parts.length) ? Integer.parseInt(v1Parts[i]) : 0;
             int num2 = (i < v2Parts.length) ? Integer.parseInt(v2Parts[i]) : 0;
 
-            if (num1 > num2) {
+            if (num1 < num2) {
                 return -1;
-            } else if (num1 < num2) {
+            } else if (num1 > num2) {
                 return 1;
             }
         }
 
         return 0;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(compareVersion("1.2", "1.1"));
+        System.out.println(compareVersion("1.1", "1.2"));
+
     }
 
 }
