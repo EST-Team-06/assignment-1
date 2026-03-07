@@ -69,3 +69,23 @@ Possible classes of inputs
 - I also wanted to test where `needle` is partially contained in `haystack`
 - T10: `strStr("haystac", "stack") == -1`
 - T11: `strStr("aystack", "hay") == -1`
+
+
+# Structural Testing
+
+## Step 1: Perform specification based testing
+- Already performed
+
+## Step 2: Read the implementation, and understand the main coding decisions made by the developer
+- I see there is a check for rejecting null strings. I add two test cases for that:
+- T12: `strStr("null", "needle") == IllegalArgumentException`
+- T13: `strStr("haystack", "null") == IllegalArgumentException`
+
+## Step 3: Run the devised test suite with a coverage tool
+- I got 100% branch coverage with JaCoCo
+
+## Step 4: For each piece of code that is not covered understand why it was not tested
+- Since I got 100% branch coverage, it's not applicable
+
+## Step 5: Review the source code and derive additional tests using Step 4
+- The 13 test cases I derived in the previous steps seem to be enough
