@@ -89,3 +89,12 @@ Possible classes of inputs
 
 ## Step 5: Review the source code and derive additional tests using Step 4
 - The 13 test cases I derived in the previous steps seem to be enough
+
+
+# Mutation Testing
+
+- I ran: `mvn test-compile org.pitest:pitest-maven:mutationCoverage` and got
+  - 94% Line coverage (class signature is not tested)
+  - 100% Mutation coverage
+  - Generated 15 mutants, killed 15
+- The class declaration was not covered by the tests, resulting in 94% line coverage 
