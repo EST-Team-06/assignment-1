@@ -38,4 +38,8 @@ public class FindFirstOccurrence {
         return -1;
     }
 
+//    public static void main(String[] args) {
+//        System.out.println(strStr("aabbcc", "bb"));
+//        System.out.println(strStr("test", "t"));
+//    }
 }
