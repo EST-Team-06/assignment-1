@@ -21,7 +21,7 @@
 * I got output:
     ``` 
     15
-    5
+    6
     ```
 * Since this was wrong, I checked the code and found a bug:
     ``` 
