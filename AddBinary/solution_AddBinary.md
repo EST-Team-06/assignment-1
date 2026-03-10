@@ -104,7 +104,7 @@ addBinary("11", "1") == "100" (valid)
 # Structual testing
 * While reading the book chapters, I also implemented all code the author implemented and learned how to use JaCoCo that way with the help of AI. 
   * I assume that I do not have report this as it was in the past and not specifically to solve this task.
-    * The prompt was along the lines of: Give me what I have to add to `prom.xml` to make JaCoCo work
+    * The prompt was along the lines of: Give me what I have to add to `pom.xml` to make JaCoCo work
   * I also cross-checked and found this post on StackOverflow: https://stackoverflow.com/a/79507359 (Which is the current one I'm using, not the AI generated one!)
   * So I run `mvn clean test`, it creates the report, which I can then view and check.
 
