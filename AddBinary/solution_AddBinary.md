@@ -57,7 +57,7 @@ addBinary("11", "1") == "100" (valid)
 * T3.1: `"10" + "1" = "11"`
 * T3.2: `"1"  + "10" = "11"`
 * T3.3: `"11" + "1" = "100"`
-  * Because addition is associative, maybe T3.1 and T3.2 do not have to be differentiated.
+  * Because addition is commutative, maybe T3.1 and T3.2 do not have to be differentiated.
   * However, maybe the code has a dependency on what is right or left, so I keep it.
 * T4: `"" + "0" = Throw IllegalArgumentException`
 * T5: `"0" + ((10**4 * "1")+1) = Throw IllegalArgumentException`
