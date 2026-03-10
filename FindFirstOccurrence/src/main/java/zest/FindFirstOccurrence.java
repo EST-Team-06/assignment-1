@@ -16,6 +16,14 @@ public class FindFirstOccurrence {
             throw new IllegalArgumentException("Input strings cannot be null");
         }
 
+        if (haystack.isEmpty() || needle.isEmpty()) {
+            throw new IllegalArgumentException("Input strings cannot be empty");
+        }
+
+        if (haystack.length() > 10000 || needle.length() > 10000) {
+            throw new IllegalArgumentException("Input strings cannot be longer than 10000");
+        }
+
         int hLen = haystack.length();
         int nLen = needle.length();
 

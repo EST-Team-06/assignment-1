@@ -52,23 +52,27 @@ Possible classes of inputs
 - The boundary values are at the minimum and maximum allowed input lengths: 1 and 10.000
 
 ## Step 5: Devise test cases
-- T1: `strStr("aabbcc", "d") == -1`
-- T2: `strStr("aabbcc", "a") == 0`
-- T3: `strStr("aabbcc", "bb") == 2`
-- T4: `strStr("aabbc", "c") == 4`
-- T5: `strStr("sadbutsad", "sad") == 0`
-- T6: `strStr("abc", "abc") == 0`
-- T7: `strStr("a", "abc") == -1`
-- T8: `strStr("a"*9999 + "b", "b") == 9999`
-- T9: `strStr("a"*10000, "a") == 0`
+- T1:  `strStr("aabbcc", "d") == -1`
+- T2:  `strStr("aabbcc", "a") == 0`
+- T3:  `strStr("aabbcc", "bb") == 2`
+- T4:  `strStr("aabbc", "c") == 4`
+- T5:  `strStr("sadbutsad", "sad") == 0`
+- T6:  `strStr("abc", "abc") == 0`
+- T7:  `strStr("a", "abc") == -1`
+- T8:  `strStr("a"*9999 + "b", "b") == 9999`
+- T9:  `strStr("a"*10000, "a") == 0`
+- T10: `strStr("a"*10001, "needle") == IllegalArgumentException`
+- T11: `strStr("haystack", "a"*10001) == IllegalArgumentException`
+- T12: `strStr("", "needle") == IllegalArgumentException`
+- T13: `strStr("haystack", "") == IllegalArgumentException`
 
 ## Step 6: Automate the test cases
 - Refer to [FindFirstOccurrenceTest](https://github.com/EST-Team-06/assignment-1/blob/add-binary/FindFirstOccurrence/src/test/java/zest/FindFirstOccurrenceTest.java)
 
 ## Step 7: Use creativity and experience to augment test suite
 - I also wanted to test where `needle` is partially contained in `haystack`
-- T10: `strStr("haystac", "stack") == -1`
-- T11: `strStr("aystack", "hay") == -1`
+- T14: `strStr("haystac", "stack") == -1`
+- T15: `strStr("aystack", "hay") == -1`
 
 
 # Structural Testing
@@ -78,8 +82,8 @@ Possible classes of inputs
 
 ## Step 2: Read the implementation, and understand the main coding decisions made by the developer
 - I see there is a check for rejecting null strings. I add two test cases for that:
-- T12: `strStr("null", "needle") == IllegalArgumentException`
-- T13: `strStr("haystack", "null") == IllegalArgumentException`
+- T16: `strStr("null", "needle") == IllegalArgumentException`
+- T17: `strStr("haystack", "null") == IllegalArgumentException`
 
 ## Step 3: Run the devised test suite with a coverage tool
 - I got 100% branch coverage with JaCoCo
@@ -94,7 +98,7 @@ Possible classes of inputs
 # Mutation Testing
 
 - I ran: `mvn test-compile org.pitest:pitest-maven:mutationCoverage` and got
-  - 94% Line coverage (class signature is not tested)
+  - 96% Line coverage (class signature is not tested)
   - 100% Mutation coverage
   - Generated 15 mutants, killed 15
-- The class declaration was not covered by the tests, resulting in 94% line coverage 
+- The class declaration was not covered by the tests, resulting in 96% line coverage 

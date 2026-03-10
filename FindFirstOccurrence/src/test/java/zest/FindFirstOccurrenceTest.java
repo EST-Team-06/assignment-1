@@ -21,6 +21,34 @@ public class FindFirstOccurrenceTest {
     }
 
     @Test
+    void testBoundaryHaystack() {
+        assertThatThrownBy(()->{
+            strStr("a".repeat(10001), "needle");
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void testBoundaryNeedle() {
+        assertThatThrownBy(()->{
+            strStr("haystack", "a".repeat(10001));
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void testEmptyHaystack() {
+        assertThatThrownBy(()->{
+            strStr("", "needle");
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void testEmptyNeedle() {
+        assertThatThrownBy(()->{
+            strStr("haystack", "");
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     void testNullHaystack() {
         assertThatThrownBy(()->{
             strStr(null, "needle");
