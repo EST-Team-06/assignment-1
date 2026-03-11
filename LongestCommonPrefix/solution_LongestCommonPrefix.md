@@ -99,3 +99,18 @@ Possible classes of inputs:
 - T14: `longestCommonPrefix(["foo", "}"]) == IllegalArgumentException`
 - After that I got 100% branch coverage
 - I tried to reach 100% branch coverage here in this case because I realized it's easy and fast to cover, but I think this case wasn't necessarily needed
+
+
+# Mutation Testing
+
+- I ran: `mvn test-compile org.pitest:pitest-maven:mutationCoverage` and got
+  - 97% Line coverage (class declaration is not tested)
+  - 91% Mutation coverage
+  - Generated 22 mutants, killed 10
+
+- I looked at the survived mutants and saw that changing the conditional boundary of `strs[i].length() > 200` survived my test cases
+- This is because my test case with a string of length 200 doesn't reach this branch since it's the first element and doesn't enter the for loop which starts from the first element. 
+- I changed added a slightly adjusted version of T10, T15: `longestCommonPrefix(["aaa", "a"*200]) == "aaa"`
+- After that I only have one surviving mutant
+- The remaining surviving mutant is due to changing the conditional boundary of ASCII characters. While I can add tests containing a and z, I think this is not necessary
+- The class declaration was not covered by the tests, resulting in 97% line coverage 

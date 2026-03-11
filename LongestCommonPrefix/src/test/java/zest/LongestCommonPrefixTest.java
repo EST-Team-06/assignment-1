@@ -81,6 +81,7 @@ public class LongestCommonPrefixTest {
                 of(new String[]{"foo", "foobar"}, "foo"),
                 of(Collections.nCopies(200, "foo").toArray(new String[0]), "foo"),
                 of(new String[]{"a".repeat(200)}, "a".repeat(200)),
+                of(new String[]{"aaa", "a".repeat(200)}, "aaa"),
                 of(new String[]{"hello", "hell", "hel", "he"}, "he"),
                 of(new String[]{"he", "hel", "hell", "hello"}, "he")
         );
