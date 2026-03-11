@@ -43,9 +43,9 @@ public class LengthOfLastWord {
         return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
     }
 
-    public static void main(String[] args) {
-        System.out.println(lengthOfLastWord("foobar"));
-        System.out.println(lengthOfLastWord("foo bar"));
-        System.out.println(lengthOfLastWord("foo bar baz"));
-    }
+//    public static void main(String[] args) {
+//        System.out.println(lengthOfLastWord("foobar"));
+//        System.out.println(lengthOfLastWord("foo bar"));
+//        System.out.println(lengthOfLastWord("foo bar baz"));
+//    }
 }

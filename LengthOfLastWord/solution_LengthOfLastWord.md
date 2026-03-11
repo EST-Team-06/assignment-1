@@ -78,3 +78,30 @@ Possible classes of inputs:
 ## Step 7: Use creativity and experience to augment test suite
 - I also wanted to test where `s` has multiple spaces between the words
 - T12:  `lengthOfLastWord("foo  bar   baz") == 5`
+
+
+# Structural Testing
+
+## Step 1: Perform specification based testing
+- Already performed
+
+## Step 2: Read the implementation, and understand the main coding decisions made by the developer
+- I see there is a check for rejecting null strings. I add a test case for that:
+- T13: `lengthOfLastWord("null") == IllegalArgumentException`
+
+## Step 3: Run the devised test suite with a coverage tool
+- After running `mvn clean test` I got 83% branch coverage. I apparently only partially covered the english character check I added in T2 and T3
+
+## Step 4: For each piece of code that is not covered understand why it was not tested
+- Partial coverage was because I didn't cover the uppercase english letters. I read the problem description again to be sure that uppercase characters are also allowed
+- Based on the description uppercase characters are not considered invalid. "A string s consisting of English letters and spaces ' '."
+
+## Step 5: Review the source code and derive additional tests using Step 4
+- I add three more test case to cover uncovered uppercase letter branches:
+- Here I have 3 uncovered branches in the `(c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')` statement. I have to find 3 ASCII character covering all the regions
+- I realize I miss the following regions: "Z" < c < "a" and > "z"
+- I add two cases covering these 
+- T14: `lengthOfLastWord("Hello_World") == IllegalArgumentException`
+- T15: `lengthOfLastWord("Hello}World") == IllegalArgumentException`
+- After that I got 100% branch coverage
+- I tried to reach 100% branch coverage here in this case because I realized it's easy and fast to cover, but I think these cases weren't necessarily needed 

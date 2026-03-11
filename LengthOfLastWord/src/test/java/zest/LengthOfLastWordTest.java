@@ -20,10 +20,25 @@ public class LengthOfLastWordTest {
         assertThat(lengthOfLastWord(s)).isEqualTo(expected);
     }
 
+    @ParameterizedTest
+    @MethodSource("invalidCharacterCases")
+    void testStringWithInvalidCharacters(String s) {
+        assertThatThrownBy(() -> {
+            lengthOfLastWord(s);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
     @Test
     void testEmptyString() {
         assertThatThrownBy(()->{
             lengthOfLastWord("");
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void testNullString() {
+        assertThatThrownBy(()->{
+            lengthOfLastWord(null);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -35,17 +50,17 @@ public class LengthOfLastWordTest {
     }
 
     @Test
-    void testStringWithInvalidAndValidCharacters() {
-        assertThatThrownBy(()->{
-            lengthOfLastWord("hello.world");
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
     void testBoundaryString() {
         assertThatThrownBy(()->{
             lengthOfLastWord("a".repeat(10001));
         }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    static Stream<String> invalidCharacterCases() {
+        return Stream.of(
+                "Hello_World",
+                "Hello}World"
+        );
     }
 
     static Stream<Arguments> testCases() {
@@ -57,8 +72,8 @@ public class LengthOfLastWordTest {
                 of("   ", 0),
                 of("hello w", 1),
                 of("hello world", 5),
-                of("foo  bar   baz", 3)
-                
+                of("foo  bar   baz", 3),
+                of("Hello World", 5)
         );
     }
 }
