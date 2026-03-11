@@ -27,7 +27,7 @@
 ### Input: `s`
 Possible classes of inputs:
 - Empty string
-- String with invalid characters characters
+- String with invalid characters
 - String with some invalid characters
 - String with valid characters
   - String with length > 10⁴
@@ -41,7 +41,7 @@ Possible classes of inputs:
 
 ### Output
 - `0` when we only have invalid characters and/or space
-- `> 1` when we have english characters
+- `> 1` when we have English characters
 
 ## Step 4: Analyze boundaries
 - The boundary values are at the minimum and maximum allowed input length: 1 and 10.000
@@ -90,16 +90,16 @@ Possible classes of inputs:
 - T13: `lengthOfLastWord("null") == IllegalArgumentException`
 
 ## Step 3: Run the devised test suite with a coverage tool
-- After running `mvn clean test` I got 83% branch coverage. I apparently only partially covered the english character check I added in T2 and T3
+- After running `mvn clean test` I got 83% branch coverage. I apparently only partially covered the English character check I added in T2 and T3
 
 ## Step 4: For each piece of code that is not covered understand why it was not tested
-- Partial coverage was because I didn't cover the uppercase english letters. I read the problem description again to be sure that uppercase characters are also allowed
+- Partial coverage was because I didn't cover the uppercase English letters. I read the problem description again to be sure that uppercase characters are also allowed
 - Based on the description uppercase characters are not considered invalid. "A string s consisting of English letters and spaces ' '."
 
 ## Step 5: Review the source code and derive additional tests using Step 4
 - I add three more test case to cover uncovered uppercase letter branches:
 - Here I have 3 uncovered branches in the `(c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')` statement. I have to find 3 ASCII character covering all the regions
-- I realize I miss the following regions: "Z" < c < "a" and > "z"
+- I realize I miss the following regions: "Z" < c < "a" and c > "z"
 - I add two cases covering these 
 - T14: `lengthOfLastWord("Hello_World") == IllegalArgumentException`
 - T15: `lengthOfLastWord("Hello}World") == IllegalArgumentException`
@@ -109,7 +109,7 @@ Possible classes of inputs:
 # Mutation Testing
 
 - I ran: `mvn test-compile org.pitest:pitest-maven:mutationCoverage` and got
-  - 96% Line coverage (class decleration is not tested)
+  - 96% Line coverage (class declaration is not tested)
   - 83% Mutation coverage
   - Generated 23 mutants, killed 19
 
