@@ -70,3 +70,32 @@ Possible classes of inputs:
 - I also wanted to test the following case:
 - T12:  `longestCommonPrefix(["hello", "hell", "hel", "he"]) == "he"`
 - T13:  `longestCommonPrefix(["he", "hel", "hell", "hello"]) == "he"`
+
+# Structural Testing
+
+## Step 1: Perform specification based testing
+- Already performed
+
+## Step 2: Read the implementation, and understand the main coding decisions made by the developer
+- I see there is a check for rejecting null strings. I add a test case for that:
+- T13: `longestCommonPrefix(null) == IllegalArgumentException`
+
+## Step 3: Run the devised test suite with a coverage tool
+- After running `mvn clean test` I got 84% branch coverage. I partially covered English character case, and didn't cover the following branch:
+  ```java
+      if (prefix.isEmpty()) {
+        return "";
+      }
+  ``` 
+
+## Step 4: For each piece of code that is not covered understand why it was not tested
+- I realized this branch is not reachable. If the string is empty (""), the parent if check would be false. So I removed this unnecessary check.
+- And the partial coverage was because I didn't cover the second check in the `(c < 'a' || c > 'z')` statement. 
+
+## Step 5: Review the source code and derive additional tests using Step 4
+- I add one more test case to cover uncovered letter branch:
+- Here I have one uncovered branch in the `(c < 'a' || c > 'z')` statement. To cover this I have to find a c > 'z' case
+- I add a case covering this
+- T14: `longestCommonPrefix(["foo", "}"]) == IllegalArgumentException`
+- After that I got 100% branch coverage
+- I tried to reach 100% branch coverage here in this case because I realized it's easy and fast to cover, but I think this case wasn't necessarily needed

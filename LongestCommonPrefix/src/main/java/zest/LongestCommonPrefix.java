@@ -32,9 +32,6 @@ public class LongestCommonPrefix {
                 throw new IllegalArgumentException("Input array contains non-English characters");
             }
             while (!strs[i].startsWith(prefix)) {
-                if (prefix.isEmpty()) {
-                    return "";
-                }
                 prefix = prefix.substring(0, prefix.length() - 1);
             }
         }
@@ -53,8 +50,8 @@ public class LongestCommonPrefix {
         return false;
     }
 
-    public static void main(String[] args) {
-        System.out.println(longestCommonPrefix(new String[] {"foobar", "foo"}));
-        System.out.println(longestCommonPrefix(new String[] {"foo", "bar"}));
-    }
+//    public static void main(String[] args) {
+//        System.out.println(longestCommonPrefix(new String[] {"foobar", "foo"}));
+//        System.out.println(longestCommonPrefix(new String[] {"foo", "bar"}));
+//    }
 }

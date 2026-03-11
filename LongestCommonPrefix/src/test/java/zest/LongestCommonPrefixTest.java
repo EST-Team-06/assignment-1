@@ -28,9 +28,16 @@ public class LongestCommonPrefixTest {
     }
 
     @Test
-    void testInvalidCharacter() {
+    void testInvalidCharacter_1() {
         assertThatThrownBy(() ->
                 longestCommonPrefix(new String[]{"foo", "."}))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void testInvalidCharacter_2() {
+        assertThatThrownBy(() ->
+                longestCommonPrefix(new String[]{"foo", "}"}))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -44,9 +51,23 @@ public class LongestCommonPrefixTest {
     }
 
     @Test
-    void testStringTooLong() {
+    void testFirstStringTooLong() {
         assertThatThrownBy(() ->
                 longestCommonPrefix(new String[]{"a".repeat(201)}))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void testSecondStringTooLong() {
+        assertThatThrownBy(() ->
+                longestCommonPrefix(new String[]{"a", "a".repeat(201)}))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void testNullArray() {
+        assertThatThrownBy(() ->
+                longestCommonPrefix(null))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
