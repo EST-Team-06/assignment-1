@@ -78,7 +78,7 @@ Possible classes of inputs:
 
 ## Step 2: Read the implementation, and understand the main coding decisions made by the developer
 - I see there is a check for rejecting null strings. I add a test case for that:
-- T13: `moveZeroes("null") == IllegalArgumentException`
+- T13: `moveZeroes(null) == IllegalArgumentException`
 
 ## Step 3: Run the devised test suite with a coverage tool
 - After running `mvn clean test` I got 100% branch coverage with JaCoCo
@@ -88,3 +88,11 @@ Possible classes of inputs:
 
 ## Step 5: Review the source code and derive additional tests using Step 4
 - The 12 test cases I derived in the previous steps seem to be enough
+
+# Mutation Testing
+
+- I ran: `mvn test-compile org.pitest:pitest-maven:mutationCoverage` and got
+    - 93% Line coverage (class declaration is not tested)
+    - 100% Mutation coverage
+    - Generated 8 mutants, killed 8
+- The class declaration was not covered by the tests, resulting in 93% line coverage
