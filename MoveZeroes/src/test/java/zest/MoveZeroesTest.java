@@ -26,6 +26,13 @@ public class MoveZeroesTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    void testNullArray() {
+        assertThatThrownBy(()->{
+            applyMoveZeroes(null);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
     static Stream<Arguments> testCases() {
         return Stream.of(
                 of(new int[]{0}, new int[]{0}),

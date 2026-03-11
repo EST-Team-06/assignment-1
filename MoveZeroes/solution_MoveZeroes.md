@@ -69,3 +69,22 @@ Possible classes of inputs:
 ## Step 7: Use creativity and experience to augment test suite
 - I also want to test a case where we have zeroes everywhere except the last element, even though this is in the partition class of T8
 - T12: `moveZeroes([0,0,0,0,0,1], [1,0,0,0,0,0])`
+
+
+# Structural Testing
+
+## Step 1: Perform specification based testing
+- Already performed
+
+## Step 2: Read the implementation, and understand the main coding decisions made by the developer
+- I see there is a check for rejecting null strings. I add a test case for that:
+- T13: `moveZeroes("null") == IllegalArgumentException`
+
+## Step 3: Run the devised test suite with a coverage tool
+- After running `mvn clean test` I got 100% branch coverage with JaCoCo
+
+## Step 4: For each piece of code that is not covered understand why it was not tested
+- Since I got 100% branch coverage, it's not applicable
+
+## Step 5: Review the source code and derive additional tests using Step 4
+- The 12 test cases I derived in the previous steps seem to be enough
