@@ -73,7 +73,8 @@ public class LengthOfLastWordTest {
                 of("hello w", 1),
                 of("hello world", 5),
                 of("foo  bar   baz", 3),
-                of("Hello World", 5)
+                of("Hello World", 5),
+                of("a".repeat(10000), 10000)
         );
     }
 }

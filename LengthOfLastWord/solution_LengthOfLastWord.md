@@ -105,3 +105,16 @@ Possible classes of inputs:
 - T15: `lengthOfLastWord("Hello}World") == IllegalArgumentException`
 - After that I got 100% branch coverage
 - I tried to reach 100% branch coverage here in this case because I realized it's easy and fast to cover, but I think these cases weren't necessarily needed 
+
+# Mutation Testing
+
+- I ran: `mvn test-compile org.pitest:pitest-maven:mutationCoverage` and got
+  - 96% Line coverage (class decleration is not tested)
+  - 83% Mutation coverage
+  - Generated 23 mutants, killed 19
+
+- I looked at the survived mutants and saw that changing the conditional boundary of `s.length() > 10000` survived my test cases
+- So I added T16: `lengthOfLastWord("a"*10000) == 10000`
+- After that 20 mutants were killed out of 23
+- The rest of the surviving mutants are due to changing the conditional boundary of ASCII characters. While I can add tests containing a, A, z, Z, I think this is not necessary 
+- The class declaration was not covered by the tests, resulting in 96% line coverage 
