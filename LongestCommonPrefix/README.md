@@ -9,29 +9,29 @@ The solution should handle all valid edge cases and respect the given constraint
 
 Inputs:
 
-**An array of strings strs.
+* An array of strings strs.
 
-**The array contains between 1 and 200 strings.
+* The array contains between 1 and 200 strings.
 
-**Each string may have a length between 0 and 200 characters.
+* Each string may have a length between 0 and 200 characters.
 
-**Strings consist only of lowercase English letters if they are non-empty.
+* Strings consist only of lowercase English letters if they are non-empty.
 
 Output:
 
-**A string representing the longest common prefix shared among all input strings.
+* A string representing the longest common prefix shared among all input strings.
 
-**If no common prefix exists, return "".
+* If no common prefix exists, return "".
 
 Behavior:
 
-**The method should compare the strings and progressively determine the longest prefix common to all elements in the array.
+* The method should compare the strings and progressively determine the longest prefix common to all elements in the array.
 
-**The method should correctly handle edge cases such as an array containing only one string, empty strings, strings of different lengths, and strings that are identical.
+* The method should correctly handle edge cases such as an array containing only one string, empty strings, strings of different lengths, and strings that are identical.
 
 
-#Example
+# Example
 
-**Input: numbers = ["flower","flow","flight"]
+* Input: strs = ["flower","flow","flight"]
 
-**Output:  "fl"
+* Output:  "fl"
