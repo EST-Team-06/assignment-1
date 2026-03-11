@@ -15,13 +15,22 @@ public class LongestCommonPrefix {
             throw new IllegalArgumentException("Input array cannot be null");
         }
 
-        if (strs.length == 0) {
-            return "";
+        if (strs.length == 0 || strs.length > 200) {
+            throw new IllegalArgumentException("Input array cannot be empty");
         }
 
         String prefix = strs[0];
+        if (strs[0].length() > 200) {
+            throw new IllegalArgumentException("Input array contains more than 200 characters");
+        }
 
         for (int i = 1; i < strs.length; i++) {
+            if (strs[i].length() > 200) {
+                throw new IllegalArgumentException("Input array contains more than 200 characters");
+            }
+            if (containsNonEnglishCharacters(strs[i])) {
+                throw new IllegalArgumentException("Input array contains non-English characters");
+            }
             while (!strs[i].startsWith(prefix)) {
                 if (prefix.isEmpty()) {
                     return "";
@@ -31,5 +40,21 @@ public class LongestCommonPrefix {
         }
 
         return prefix;
+    }
+
+    private static boolean containsNonEnglishCharacters(String str) {
+        str = str.toLowerCase();
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (c < 'a' || c > 'z') {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(longestCommonPrefix(new String[] {"foobar", "foo"}));
+        System.out.println(longestCommonPrefix(new String[] {"foo", "bar"}));
     }
 }

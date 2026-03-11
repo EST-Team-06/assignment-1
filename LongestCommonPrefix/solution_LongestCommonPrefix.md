@@ -1,0 +1,72 @@
+# Specification-based Testing
+
+## Step 1: Understand requirements
+- Based on the requirements, we have a method that should find the longest common prefix in a given list of strings 
+- Input: strs (list[string])
+- Output: longest common prefix (string)
+- The array contains 1 between 200 strings
+- The length of the individual strings is bounded between 0 and 200
+- Individual strings consist only of lowercase English letters if not empty
+- If no common prefix exists, the functions should return ""
+
+## Step 2: Explore program if is not well-known
+- From the requirements, it is clear for me how the function should behave.
+- To ensure the function behaves as expected, I tried two basic examples and got the following outputs:
+  ```
+    System.out.println(longestCommonPrefix(new String[] {"foobar", "foo"})); # outputs "foo"
+    System.out.println(longestCommonPrefix(new String[] {"foo", "bar"}));    # outputs ""
+  ```
+- The function gave the expected outputs
+
+## Step 3: Analyze properties of inputs and outputs, identify partitions
+
+### Input: `strs`
+Possible classes of inputs:
+- Empty list
+- Only one string in the list
+- More than one string in the list
+  - At least one string is empty
+  - At least one string has an invalid character
+  - No common prefix
+  - Common prefix with one letter
+  - Common prefix with multiple letters
+  - All strings are same
+
+### Output
+- `""` when there is no common prefix
+- Non-empty string when there is a prefix
+
+## Step 4: Analyze boundaries
+- Allowed list length: 1 and 200
+- Allowed string length: 0 and 200
+
+## Step 5: Devise test cases
+- T1:  `longestCommonPrefix([""]) == """`
+- T2:  `longestCommonPrefix(["foo"]) == "foo"`
+- T3:  `longestCommonPrefix(["foo", ""]) == ""`
+- T4:  `longestCommonPrefix(["foo", "."]) == IllegalArgumentException`
+- T5:  `longestCommonPrefix(["foo", "bar"]) == ""`
+- T6:  `longestCommonPrefix(["foo", "f"]) == "f"`
+- T7:  `longestCommonPrefix(["foo", "foobar"]) == foo`
+- T8:  `longestCommonPrefix(["foo"]*200) == "foo"`
+- T9:  `longestCommonPrefix(["foo"]*201) == IllegalArgumentException`
+- T10:  `longestCommonPrefix(["a"*200]) == "a"*200`
+- T11:  `longestCommonPrefix(["a"*201]) == IllegalArgumentException`
+
+- I see that all the tests expecting IllegalArgumentException fail. So I add check for each case:
+    ```java
+        if (word.length() > 200) {
+            throw new IllegalArgumentException("Input array contains more than 200 characters");
+        }
+        if (containsNonEnglishCharacters(word)) {
+            throw new IllegalArgumentException("Input array contains non-English characters");
+        }
+    ```
+
+## Step 6: Automate the test cases
+- Refer to [LongestCommonPrefix](https://github.com/EST-Team-06/assignment-1/blob/add-binary/LongestCommonPrefix/src/test/java/zest/LongestCommonPrefixTest.java)
+
+## Step 7: Use creativity and experience to augment test suite
+- I also wanted to test the following case:
+- T12:  `longestCommonPrefix(["hello", "hell", "hel", "he"]) == "he"`
+- T13:  `longestCommonPrefix(["he", "hel", "hell", "hello"]) == "he"`
