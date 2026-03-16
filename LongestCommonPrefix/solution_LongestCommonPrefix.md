@@ -114,5 +114,5 @@ Possible classes of inputs:
 - This is because my test case with a string of length 200 doesn't reach this branch since it's the first element and doesn't enter the for loop which starts from the first element. 
 - I changed added a slightly adjusted version of T11: `longestCommonPrefix(["aaa", "a"*200]) == "aaa"`
 - After that I only have one surviving mutant
-- The remaining surviving mutant is due to changing the conditional boundary of ASCII characters. While I can add tests containing a and z, I think this is not necessary
+- The remaining surviving mutant is due to changing the conditional boundary of ASCII characters. While I can add tests containing a and z, I think this is not necessary. Because changing these limits would exclude these characters and break the intended logic which is unlikely to happen unintentionally
 - The class declaration was not covered by the tests, resulting in 97% line coverage 
