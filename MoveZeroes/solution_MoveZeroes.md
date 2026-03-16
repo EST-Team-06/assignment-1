@@ -55,15 +55,16 @@ Possible classes of inputs:
 - T10: `moveZeroes([1,2,0]) == [1,2,0]`
 - T11: `moveZeroes([1,0,0,0,3,2]) == [1,3,2,0,0,0]`
 
-- Surprisingly, only 3 tests pass, so I look for a bug in the code.
+- Surprisingly, only 3 tests pass, so I look for a bug in the code
 - I see that when moving non-zero elements to the front, the last element is not considered, so it's place is always overwritten by 0
-- I make sure this is the case by looking at the passing cases. They all have 0 as the last element.
-- I fix `i < numbers.length-1` to `i < numbers.length`, now the last element is also considered.
+- I make sure this is the case by looking at the passing cases. They all have 0 as the last element
+- I fix `i < numbers.length-1` to `i < numbers.length`, now the last element is also considered
 - I also add a check for empty array, as this also failed
 
 ## Step 6: Automate the test cases
-- This problem was a bit tricky to test. Because in addition to asserting the expected output, I also have to assert the original reference of the array to see if it was indeed modified in-place.
+- This problem was a bit tricky to test. Because in addition to asserting the expected output, I also have to assert the original reference of the array to see if it was indeed modified in-place
 - For this goal I added a helper function `applyMoveZeroes`
+- I assert if the original array is modified correctly, however I don't check if any additional helper arrays were created at runtime. I considered doing so, but there is no easy way to verify that, and considering the focus of the course, I decided not to check this case
 - Refer to [LengthOfLastWordTest](https://github.com/EST-Team-06/assignment-1/blob/add-binary/LengthOfLastWord/src/test/java/zest/LengthOfLastWordTest.java)
 
 ## Step 7: Use creativity and experience to augment test suite
