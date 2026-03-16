@@ -26,6 +26,7 @@ Possible classes of inputs:
 - Only one string in the list
 - More than one string in the list
   - At least one string is empty
+  - At least one string is null
   - At least one string has an invalid character
   - No common prefix
   - Common prefix with one letter
@@ -44,14 +45,15 @@ Possible classes of inputs:
 - T1:  `longestCommonPrefix([""]) == """`
 - T2:  `longestCommonPrefix(["foo"]) == "foo"`
 - T3:  `longestCommonPrefix(["foo", ""]) == ""`
-- T4:  `longestCommonPrefix(["foo", "."]) == IllegalArgumentException`
-- T5:  `longestCommonPrefix(["foo", "bar"]) == ""`
-- T6:  `longestCommonPrefix(["foo", "f"]) == "f"`
-- T7:  `longestCommonPrefix(["foo", "foobar"]) == foo`
-- T8:  `longestCommonPrefix(["foo"]*200) == "foo"`
-- T9:  `longestCommonPrefix(["foo"]*201) == IllegalArgumentException`
-- T10:  `longestCommonPrefix(["a"*200]) == "a"*200`
-- T11:  `longestCommonPrefix(["a"*201]) == IllegalArgumentException`
+- T4:  `longestCommonPrefix(["foo", null]) == IllegalArgumentException`
+- T5:  `longestCommonPrefix(["foo", "."]) == IllegalArgumentException`
+- T6:  `longestCommonPrefix(["foo", "bar"]) == ""`
+- T7:  `longestCommonPrefix(["foo", "f"]) == "f"`
+- T8:  `longestCommonPrefix(["foo", "foobar"]) == foo`
+- T9:  `longestCommonPrefix(["foo"]*200) == "foo"`
+- T10:  `longestCommonPrefix(["foo"]*201) == IllegalArgumentException`
+- T11:  `longestCommonPrefix(["a"*200]) == "a"*200`
+- T12:  `longestCommonPrefix(["a"*201]) == IllegalArgumentException`
 
 - I see that all the tests expecting IllegalArgumentException fail. So I add check for each case:
     ```java
@@ -68,8 +70,8 @@ Possible classes of inputs:
 
 ## Step 7: Use creativity and experience to augment test suite
 - I also wanted to test the following case:
-- T12:  `longestCommonPrefix(["hello", "hell", "hel", "he"]) == "he"`
-- T13:  `longestCommonPrefix(["he", "hel", "hell", "hello"]) == "he"`
+- T13:  `longestCommonPrefix(["hello", "hell", "hel", "he"]) == "he"`
+- T14:  `longestCommonPrefix(["he", "hel", "hell", "hello"]) == "he"`
 
 # Structural Testing
 
@@ -77,8 +79,8 @@ Possible classes of inputs:
 - Already performed
 
 ## Step 2: Read the implementation, and understand the main coding decisions made by the developer
-- I see there is a check for rejecting null strings. I add a test case for that:
-- T13: `longestCommonPrefix(null) == IllegalArgumentException`
+- I see there is a check for rejecting null arrays. I add a test case for that:
+- T15: `longestCommonPrefix(null) == IllegalArgumentException`
 
 ## Step 3: Run the devised test suite with a coverage tool
 - After running `mvn clean test` I got 84% branch coverage. I partially covered English character case, and didn't cover the following branch:
@@ -96,7 +98,7 @@ Possible classes of inputs:
 - I add one more test case to cover uncovered letter branch:
 - Here I have one uncovered branch in the `(c < 'a' || c > 'z')` statement. To cover this I have to find a c > 'z' case
 - I add a case covering this
-- T14: `longestCommonPrefix(["foo", "}"]) == IllegalArgumentException`
+- T16: `longestCommonPrefix(["foo", "}"]) == IllegalArgumentException`
 - After that I got 100% branch coverage
 - I tried to reach 100% branch coverage here in this case because I realized it's easy and fast to cover, but I think this case wasn't necessarily needed
 
@@ -110,7 +112,7 @@ Possible classes of inputs:
 
 - I looked at the survived mutants and saw that changing the conditional boundary of `strs[i].length() > 200` survived my test cases
 - This is because my test case with a string of length 200 doesn't reach this branch since it's the first element and doesn't enter the for loop which starts from the first element. 
-- I changed added a slightly adjusted version of T10, T15: `longestCommonPrefix(["aaa", "a"*200]) == "aaa"`
+- I changed added a slightly adjusted version of T11: `longestCommonPrefix(["aaa", "a"*200]) == "aaa"`
 - After that I only have one surviving mutant
 - The remaining surviving mutant is due to changing the conditional boundary of ASCII characters. While I can add tests containing a and z, I think this is not necessary
 - The class declaration was not covered by the tests, resulting in 97% line coverage 

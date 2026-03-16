@@ -25,6 +25,9 @@ public class LongestCommonPrefix {
         }
 
         for (int i = 1; i < strs.length; i++) {
+            if (strs[i] == null) {
+                throw new IllegalArgumentException("Input array cannot be null");
+            }
             if (strs[i].length() > 200) {
                 throw new IllegalArgumentException("Input array contains more than 200 characters");
             }

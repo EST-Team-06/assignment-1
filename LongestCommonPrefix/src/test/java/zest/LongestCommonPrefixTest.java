@@ -28,6 +28,13 @@ public class LongestCommonPrefixTest {
     }
 
     @Test
+    void testArrayWithNullString() {
+        assertThatThrownBy(() ->
+                longestCommonPrefix(new String[]{"foo", null}))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     void testInvalidCharacter_1() {
         assertThatThrownBy(() ->
                 longestCommonPrefix(new String[]{"foo", "."}))
