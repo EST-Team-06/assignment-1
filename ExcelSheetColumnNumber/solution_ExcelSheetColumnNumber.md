@@ -119,27 +119,22 @@
 * I implemented all tests and everything passed except T9.
 * I went back to main and printed the output for ZZZZZZZ and got:
   * `-236852010`
-* The compiler doesn't throw any error, it just wraps to tne negative side.
+* The compiler doesn't throw any error, it just wraps to the negative side.
 * To make this method conform with the requirements, I implement a check based 
   * on character length 
-  * a check based on ASCII code sum
-    * I do not use ASCII code sum only because it may suffer from the same if enough chars are used!
-  ```
-  int sum = 0;
-  int bound = 'F' + 'X' + 'S' + 'H' + 'R' + 'X' + 'W';
-  
-  sum += c;
-  if (sum > bound) {
-      throw new IllegalArgumentException("Column title may not exceed FXSHRXW");
-  }
-  ```
-  * Before this, I check if the column title length is above 7 and throw an IllegalArgumentException if that is the case.
-  * Otherwise, by using the ASCII code sum, I can prevent hitting the 32-bit signed integer limit without ever having to compute it.
+  * if result not negative
+* The second check is not immediately obvious but if we have an output that exceeds the MAX Integer limit, we wrap to negative integers.
+* We have a guarantee thanks to character length check, that the all of these invalid cases are between `FXSHRXW` and `ZZZZZZZ` 
+  * so we know the highest possible unhandled case will be still negative; adding a check to check for negativity should capture this.
 
 **Step 7: Use creativity and experience to augment test suite**
 * I cannot come up with more ways to test this. As suspected, the code does check if input strings contain only valid uppercase letters using ASCII codes.
   * A test that uses a non-valid ASCII code exists, T1.3, no point in adding more.
 * Most creativity went into fixing the bug of 32-bit signed integer limit.
+  * Initially, there a different approach of testing for 31-bit signed integer limit involving the ASCII sum
+  * So if the sum of ASCII codes of `FXSHRXW` is exceeded by what was calculated from input raise the out of bound exception
+  * However, sum of ASCII does not deal well with edge cases, where the sum is not exceeded but the wrap still occured
+    * E.g, `ZZZZAAA` would still pass and trigger integer underflow; since the sum does not care about the order of characters, whereas the column number does
 
 # Structural testing
 * To understand the setup, refer to AddBinary
@@ -163,8 +158,19 @@
 # Mutation testing
 * Refer to AddBinary to understand how Pitest was setup.
 * After running Pitest I got:
-  * Line coverage: 94%
-  * Mutation score: 100%
+  * Line coverage: 93%
+  * Mutation score: 94%
 * The line coverage is not 100% because the constructor was not used, which is fine.
-
-
+* The mutation score is 94% because there was no test that failed for:
+``` 
+if (result < 0) {	
+        throw new IllegalArgumentException("Column title may not exceed FXSHRXW");
+```
+* However, this means that if I the result was 0, the code would have thrown an error and no test would have failed.
+* I was unable to come up with a case that would reach this mutation though because:
+  * The null and empty column check prevent input from being of length 0
+  * The column title length check prevents input to be large enough to trigger a wrap around from negative back to 0
+* The check itself is only there to account for cases where the result is negative, which can occur due to wrap around. 
+  * Even if occurs for other reasons, it would be wrong to return a negative value
+  * Requirements specify returning the number corresponding to the non-zero column title, it cannot be negative.
+* With those consideration, I think this mutation is fine.

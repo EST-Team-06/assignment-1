@@ -68,7 +68,7 @@ public class ExcelSheetColumnNumberTest {
                 }).isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(
                 ()->{
-                    titleToNumber("ZZZZZZZZ");
+                    titleToNumber("AAAAAAAA");
                 }).isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -20,32 +20,26 @@ public class ExcelSheetColumnNumber {
         }
 
         int result = 0;
-        int sum = 0;
-        // upper bound is FXSHRXW
-        int bound = 'F' + 'X' + 'S' + 'H' + 'R' + 'X' + 'W';
 
         for (int i = 0; i < columnTitle.length(); i++) {
             char c = columnTitle.charAt(i);
             if (c < 'A' || c > 'Z') {
                 throw new IllegalArgumentException("Invalid character in column title");
             }
+            result = result * 26 + (c - 'A' + 1);
 
-            sum += c;
-            if (sum > bound) {
+            if (result < 0) {
                 throw new IllegalArgumentException("Column title may not exceed FXSHRXW");
             }
-
-
-
-            result = result * 26 + (c - 'A' + 1);
         }
 
         return result;
     }
 
 //    public static void main(String[] args) {
-//        System.out.println(titleToNumber("A"));
-//        System.out.println(titleToNumber("ZZZZZZZ"));
+//        int check = Integer.MAX_VALUE;
+//        System.out.println(check);
+//        System.out.println(titleToNumber("FXSHRXW"));
 //    }
 
 }
