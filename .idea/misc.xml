@@ -5,6 +5,17 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/PlusOne/pom.xml" />
+        <option value="$PROJECT_DIR$/AddBinary/pom.xml" />
+        <option value="$PROJECT_DIR$/BestTimeToBuyAndSellStock/pom.xml" />
+        <option value="$PROJECT_DIR$/CompareVersionNumbers/pom.xml" />
+        <option value="$PROJECT_DIR$/ExcelSheetColumnNumber/pom.xml" />
+        <option value="$PROJECT_DIR$/FindFirstOccurrence/pom.xml" />
+        <option value="$PROJECT_DIR$/LengthOfLastWord/pom.xml" />
+        <option value="$PROJECT_DIR$/LongestCommonPrefix/pom.xml" />
+        <option value="$PROJECT_DIR$/MoveZeroes/pom.xml" />
+        <option value="$PROJECT_DIR$/ReverseInteger/pom.xml" />
+        <option value="$PROJECT_DIR$/SortColors/pom.xml" />
+        <option value="$PROJECT_DIR$/ValidPerfectSquare/pom.xml" />
       </list>
     </option>
   </component>
