@@ -1,6 +1,11 @@
 # Specification-based Testing
 ## Step 1: Understand requirements
-- [...]
+### Business Rules
+The goal of this method is to increment a large integer, represented as an array of digits, by one. Each element in the array corresponds to a single digit of the integer, ordered from most significant (left) to least significant (right).
+### Inputs
+- `digits`: An integer array digits representing a non-negative integer. The integer array contains 1 to 100 integers, with each integer being between 0 and 9. It does not contain leading zeros.
+### Outputs
+The program returns a new integer array representing the incremented integer. The result may have a different length if a carry creates an additional digit.
 
 ## Step 2: Explore program if is not well-known
 - [...]
