@@ -36,20 +36,26 @@ Possible classes of this input:
 - Array with the least significant digit as 0
 
 ## Step 4: Analyze boundaries
-- [...]
+We can subdivide the boundaries of the input array into two categories:
+
+### Length Boundaries
+Since the input array is only allowed to have between 1 and 100 elements, we need to test arrays with lengths of 0 (off-point), 1 (on-point), 100 (on-point), and 101 (off-point).
+
+### Digit Boundaries
+Since the input array is only allowed to have digits between 0 and 9, we need to test digits -1 (off-point), 0 (on-point), 9 (on-point), and 10 (off-point).
 
 ## Step 5: Devise test cases
 - [...]
 
 ## Step 6: Automate the test cases
-- Refer to [...]()
+Refer to [...]()
 
 ## Step 7: Use creativity and experience to augment test suite
 - [...]
 
 # Structural Testing
 ## Step 1: Perform specification based testing
-- Already performed
+Refer to [Specification-based Testing](#specification-based-testing)
 
 ## Step 2: Read the implementation, and understand the main coding decisions made by the developer
 - [...]
