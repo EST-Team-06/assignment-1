@@ -63,7 +63,13 @@ Since the input array is only allowed to have digits between 0 and 9, we need to
 | T14          | `null`             | Null                                      | IllegalArgumentException   |
 
 ## Step 6: Automate the test cases
-Refer to [...]()
+Refer to [PlusOneTest.java](/src/test/java/zest/PlusOneTest.java)
+
+To make all tests pass, we had to make the following changes to [PlusOne.java](/src/main/java/zest/PlusOne.java):
+* Add the pre-condition that the input array must be `<=100` elements long.
+* Add the pre-condition that the input array must not contain any leading zeros.
+* Change the pre-condition that the input array must not contain any digits smaller than 0 and greater than 9.
+* Fix the bug that made the resulting array the same size as the input array when carrying.
 
 ## Step 7: Use creativity and experience to augment test suite
 - [...]
