@@ -45,7 +45,22 @@ Since the input array is only allowed to have between 1 and 100 elements, we nee
 Since the input array is only allowed to have digits between 0 and 9, we need to test digits -1 (off-point), 0 (on-point), 9 (on-point), and 10 (off-point).
 
 ## Step 5: Devise test cases
-- [...]
+| Test Case ID | Input `digits`     | Description                               | Expected Output            |
+|--------------|--------------------|-------------------------------------------|----------------------------|
+| T1           | `[0]`              | Single digit 0                            | `[1]`                      |
+| T2           | `[8]`              | Single digit < 9                          | `[9]`                      |
+| T3           | `[9]`              | Single digit 9                            | `[1, 0]`                   |
+| T4           | `[1, 2, 3]`        | Multi-digit, no carry                     | `[1, 2, 4]`                |
+| T5           | `[1, 2, 9]`        | Multi-digit, LSD 9, partial carry         | `[1, 3, 0]`                |
+| T6           | `[9, 9, 9]`        | Multi-digit, all 9, carry                 | `[1, 0, 0, 0]`             |
+| T7           | `[9]` * 100        | Max length array (100 elements), all 9    | `[1]` + `[0]` * 100        |
+| T8           | `[1]` + `[0]` * 99 | Max length array (100 elements), no carry | `[1]` + `[0]` * 98 + `[1]` |
+| T9           | `[]`               | Empty array                               | IllegalArgumentException   |
+| T10          | `[-1]`             | Negative digit                            | IllegalArgumentException   |
+| T11          | `[10]`             | Digit > 9                                 | IllegalArgumentException   |
+| T12          | `[0, 1]`           | Leading zero                              | IllegalArgumentException   |
+| T13          | `[9]` * 101        | Array length > 100                        | IllegalArgumentException   |
+| T14          | `null`             | Null                                      | IllegalArgumentException   |
 
 ## Step 6: Automate the test cases
 Refer to [...]()
