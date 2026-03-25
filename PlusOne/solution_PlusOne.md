@@ -1,5 +1,5 @@
 # Specification-based Testing
-## Step 1: Understand requirements
+## Step 1: Understand Requirements
 ### Business Rules
 The goal of this method is to increment a large integer, represented as an array of digits, by one. Each element in the array corresponds to a single digit of the integer, ordered from most significant (left) to least significant (right).
 ### Inputs
@@ -7,10 +7,14 @@ The goal of this method is to increment a large integer, represented as an array
 ### Outputs
 The program returns a new integer array representing the incremented integer. The result may have a different length if a carry creates an additional digit.
 
-## Step 2: Explore program if is not well-known
-- [...]
+## Step 2: Explore Program
+It is clear from the requirements how the function should behave, nonetheless we've called it with the example input listed in [README](README.md), and it returned the expected output of `[1,2,4]`:
+```java
+int[] arr = {1,2,3};
+System.out.println(Arrays.toString(plusOne(arr)));
+```
 
-## Step 3: Analyze properties of inputs and outputs, identify partitions
+## Step 3: Analyze Inputs and Outputs, and Identify Partitions
 
 ### Input: `[...]`
 Possible classes of inputs:
@@ -30,7 +34,7 @@ Possible classes of inputs:
 - [...]
 
 ## Step 6: Automate the test cases
-- Refer to [...](...)
+- Refer to [...]()
 
 ## Step 7: Use creativity and experience to augment test suite
 - [...]
