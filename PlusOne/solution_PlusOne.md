@@ -72,7 +72,7 @@ To make all tests pass, we had to make the following changes to [PlusOne.java](/
 * Fix the bug that made the resulting array the same size as the input array when carrying.
 
 ## Step 7: Use creativity and experience to augment test suite
-- [...]
+We can't think of any additional test cases.
 
 # Structural Testing
 ## Step 1: Perform specification based testing
