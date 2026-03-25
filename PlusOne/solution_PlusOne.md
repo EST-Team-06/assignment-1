@@ -79,16 +79,22 @@ We can't think of any additional test cases.
 Refer to [Specification-based Testing](#specification-based-testing)
 
 ## Step 2: Read the implementation, and understand the main coding decisions made by the developer
-- [...]
+We have read the implementation and found nothing out of the ordinary.
 
 ## Step 3: Run the devised test suite with a coverage tool
-- [...]
+Using the pre-bundled Code Coverage tool in IntelliJ IDEA, our test suite achieves 100% class, method, line and branch coverage.
 
 ## Step 4: For each piece of code that is not covered understand why it was not tested
-- [...]
+Since our test suite already achieves 100& branch coverage, we don't have any piece of code that is not exercised by the test suite.
 
 ## Step 5: Review the source code and derive additional tests using Step 4
-- [...]
+We don't have any additional tests to derive as nothing in the source code is not already covered by the test suite.
 
 # Mutation Testing
-- [...]
+Mutation testing was performed using `mvn -f PlusOne/pom.xml org.pitest:pitest-maven:mutationCoverage`, which generated the following coverage report:
+- Number of Classes: 1
+- Line Coverage: 93% (14/15)
+- Mutation Coverage: 100% (20/20)
+- Test Strength: 100% (20/20)
+
+The mutation testing shows 100% mutation coverage and 100% test strength, meaning all 20 generated mutations were killed by the test suite. The line coverage is 93% because the line `public class PlusOne {` is marked as uncovered, but all functional lines in the `plusOne` method are fully covered and tested.
