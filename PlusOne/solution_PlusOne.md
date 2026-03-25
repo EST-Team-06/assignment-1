@@ -14,12 +14,15 @@ int[] arr = {1,2,3};
 System.out.println(Arrays.toString(plusOne(arr)));
 ```
 
-## Step 3: Analyze Inputs and Outputs, and Identify Partitions
+## Step 3: Analyze Inputs, Outputs and Identify Partitions
 
-### Input: `[...]`
-Possible classes of inputs:
-- [...]
-- [...]
+### Input: `digits`
+Possible classes of this input:
+- Empty array
+- Single digit array
+- Multiple digit array
+- Array with leading zeros (invalid input)
+- Array with non-digit elements (invalid input)
 
 ### Combination of `[...]` and `[...]`
 - [...]
