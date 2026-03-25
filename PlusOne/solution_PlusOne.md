@@ -15,20 +15,25 @@ System.out.println(Arrays.toString(plusOne(arr)));
 ```
 
 ## Step 3: Analyze Inputs, Outputs and Identify Partitions
+Since there is only one input, we don't need to test combinations of inputs.
 
 ### Input: `digits`
 Possible classes of this input:
-- Empty array
 - Single digit array
-- Multiple digit array
+- Multiple digit array (between 1 and 100 elements)
+- Array with the least significant digit as 9
+- Empty array (invalid input)
+- Array with negative numbers (invalid input)
 - Array with leading zeros (invalid input)
 - Array with non-digit elements (invalid input)
-
-### Combination of `[...]` and `[...]`
-- [...]
+- Array with more than 100 elements (invalid input)
+- Array with digits greater than 9 (invalid input)
 
 ### Output
-- [...]
+- Single digit array
+- Multiple digit array (between 1 and 100 elements)
+- Multiple digit array with 101 elements
+- Array with the least significant digit as 0
 
 ## Step 4: Analyze boundaries
 - [...]
