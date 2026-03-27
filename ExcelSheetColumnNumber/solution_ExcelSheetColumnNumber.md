@@ -137,15 +137,25 @@
     * E.g, `ZZZZAAA` would still pass and trigger integer underflow; since the sum does not care about the order of characters, whereas the column number does
 
 # Structural testing
-* To understand the setup, refer to AddBinary
+## Step 1: Perform specification based testing
+Refer to [Specification-based Testing](#specification-based-testing)
+
+## Step 2: Read the implementation, and understand the main coding decisions made by the developer
+* While implementing specification-based tests, I had to understand the problem and derived the indirect requirement involving the 32-bit signed integer limit.
+* Most of the errors thrown were from me as well.
+* The essential part of the code was the loop which seemed correct to me.
+
+## Step 3: Run the devised test suite with a coverage tool
 * I ran Jacoco and got:
   * Line coverage 93%
   * Branch coverage 85%
-* It turns out, I missed implementing a test for covering more than 7 chars. 
+
+## Step 4: For each piece of code that is not covered understand why it was not tested
+* It turns out, I missed implementing a test for covering more than 7 chars.
 * After that, I got:
   * Line coverage 100%
   * Branch coverage 92%
-* The branch that was not fully covered was: 
+* The branch that was not fully covered was:
   ``` 
   if (c < 'A' || c > 'Z') {
   ```
@@ -155,8 +165,11 @@
   * Line coverage 100%
   * Branch coverage 100%
 
+## Step 5: Review the source code and derive additional tests using Step 4
+* I was unable to find more tests and called it a day.
+
 # Mutation testing
-* Refer to AddBinary to understand how Pitest was setup.
+* Refer to AddBinary to understand how Pitest was set up.
 * After running Pitest I got:
   * Line coverage: 93%
   * Mutation score: 94%
