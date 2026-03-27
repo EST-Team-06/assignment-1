@@ -101,19 +101,31 @@ addBinary("11", "1") == "100" (valid)
 * `"101010" + "1000101" = "1101111"` (42 + 69 = 111)
 * These are more personal choices because they involve zeros and ones at different positions. Just to make sure that it also works for some choices.
 
-# Structual testing
-* While reading the book chapters, I also implemented all code the author implemented and learned how to use JaCoCo that way with the help of AI. 
-  * I assume that I do not have report this as it was in the past and not specifically to solve this task.
+# Structural Testing
+## Step 1: Perform specification based testing
+Refer to [Specification-based Testing](#specification-based-testing)
+
+## Step 2: Read the implementation, and understand the main coding decisions made by the developer
+We have read the implementation and found nothing out of the ordinary.
+
+## Step 3: Run the devised test suite with a coverage tool
+* While reading the book chapters, I also implemented all code the author implemented and learned how to use JaCoCo that way with the help of AI.
+  * I assume that I do not have report this as it was in the past and not specifically to solve this task (I did not use AI for the assignment, I used AI to learn how to use Jacoco, so that's why I know it now!)
     * The prompt was along the lines of: Give me what I have to add to `pom.xml` to make JaCoCo work
   * I also cross-checked and found this post on StackOverflow: https://stackoverflow.com/a/79507359 (Which is the current one I'm using, not the AI generated one!)
   * So I run `mvn clean test`, it creates the report, which I can then view and check.
 
+## Step 4: For each piece of code that is not covered understand why it was not tested
 * Based on the report, I got 100% Line coverage and 86% Branch coverage on the `addBinary` method
   * I assume I do not have to look at the class, just the method. As we only implement the tests for the method.
   * As for the branches I missed, it turns out that I am not checking all cases, that is:
     * a = null OR b = null OR a.isEmpty() OR b.isEmpty()
     * i+1 > Math.pow(10,4) OR j+1 > Math.pow(10,4)
   * I do not think it is worth implementing extra tests for those because I am using the `||` (short-circuiting OR) and it would not bring that much additional value in my opinion, as it is in the same condition.
+
+
+## Step 5: Review the source code and derive additional tests using Step 4
+I could not come up with more tests to implement.
 
 # Mutation Testing
 * After following the provided documentation, I ran: `mvn test-compile org.pitest:pitest-maven:mutationCoverage` and got:
