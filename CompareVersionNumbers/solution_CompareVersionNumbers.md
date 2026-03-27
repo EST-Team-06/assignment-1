@@ -2,7 +2,7 @@
 **Step 1: Understand requirements**
 * The method we need to test receives two strings as input
   * Their length is restricted between 1 and 500
-  * They may only contains digits and dots
+  * They may only contain digits and dots
   * Each revision value fits within a 32-bit signed integer (-2^31 to 2^31)
     * Negative numbers are "technically" not explicitly restricted
     * But since the string can only contain digits and dots, `-` is excluded
@@ -139,11 +139,19 @@
 * T10.2: `compareVersions("hi.mom", "hello.world") == Throw IllegalArgumentException`
 * All tests still passed, so I proceed to the next stage.
 
-# Structural testing
-* Refer to AddBinary to understand how everything was set up.
+# Structural Testing
+## Step 1: Perform specification based testing
+Refer to [Specification-based Testing](#specification-based-testing)
+
+## Step 2: Read the implementation, and understand the main coding decisions made by the developer
+I took notice that I altered the code quite a bit while implementing tests; so I expect some side effects in terms of coverage.
+
+## Step 3: Run the devised test suite with a coverage tool
 * I ran `mvn clean test` to get the Jacoco coverage report and got:
   * 100% instruction coverage
   * 81% branch coverage
+
+## Step 4: For each piece of code that is not covered understand why it was not tested
 * Based on my current experience, I already can guess that it may be due to my own code changes that involved many if-branches with OR conditions and I was right:
   ``` 
   if (version1 == null || version2 == null) {
@@ -158,6 +166,12 @@
   ```
   * All these conditions are used for input validation
   * I do not see a net benefit for implementing tests that cover all cases simply to achieve 100% branch coverage.
+
+
+## Step 5: Review the source code and derive additional tests using Step 4
+* Since input validation is tight and there is not really a benefit to exercise all possible wrong inputs only to check that input validation I implemented works correctly, I decided to not implement further tests.
+* This is also due to the fact that short-circuiting is used and all operators are `||`, if an expression is `a || b`, I know that if `a=True`, I can ignore the rest.
+
 
 # Mutation testing
 * Refer to AddBinary to understand how Pitest was set up.
