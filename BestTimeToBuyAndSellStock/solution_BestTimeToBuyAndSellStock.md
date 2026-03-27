@@ -89,9 +89,17 @@
 * T11: `maxProfit([5, 4, 3, 1, 2]) == 1`
   * This should be covered by T2, I preferred having more than two values.
 
-# Structural testing
-* The Jacoco code was implemented based what seen in AddBinary
+# Structural Testing
+## Step 1: Perform specification based testing
+Refer to [Specification-based Testing](#specification-based-testing)
+
+## Step 2: Read the implementation, and understand the main coding decisions made by the developer
+Read the code and it was relatively clear where we have branches and potential for errors / coverage issues.
+
+## Step 3: Run the devised test suite with a coverage tool
 * After running `mvn clean test`, I got 100% instruction coverage and 90% branch coverage
+
+## Step 4: For each piece of code that is not covered understand why it was not tested
 * It seems that my tests somehow missed:
   ```
   if (prices[0] < 0 || prices[0] > Math.pow(10, 4)) {
@@ -102,14 +110,18 @@
       throw new IllegalArgumentException("Input array may not include prices lower than 0 or greater than 10^4");
   }
   ```
-* This surprised me, as these cases should be covered by T5 and T8.1. 
+* This surprised me, as these cases should be covered by T5 and T8.1.
 * The report mentions 1 of 4 branches missed, so I assume it is referring to all 4 cases for `(A || B)`
   * A=True, B=True
   * A=True, B=False
   * A=False, B=True
   * A=False, B=False
 * T5 checks only A=True,B=False and T8.81 only A=False,B=True.
-* Putting each condition in a different if statement may raise branch coverage but I do not believe it is that meaningful.
+* Putting each condition in a different if statement may raise branch coverage, but I do not believe it is that meaningful.
+
+## Step 5: Review the source code and derive additional tests using Step 4
+* I decided to not add additional tests because they seemed to be more inline to increasing a number rather than finding actual bugs.
+
 
 # Mutation Testing
 * I ran: `mvn test-compile org.pitest:pitest-maven:mutationCoverage` and got
