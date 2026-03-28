@@ -26,11 +26,15 @@
 
 ### Input: `haystack`
 Possible classes of inputs:
+- Null String (invalid input)
+- Empty String (invalid input)
 - String of length 1
 - String of length > 1
 
 ### Input: `needle`
-Possible classes of inputs
+Possible classes of inputs:
+- Null String (invalid input)
+- Empty String (invalid input)
 - String of length 1
 - String of length > 1
 
