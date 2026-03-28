@@ -54,6 +54,8 @@ Possible classes of inputs:
 
 ## Step 4: Analyze boundaries
 - The boundary values are at the minimum and maximum allowed input lengths: 1 and 10.000
+- The on points are 1 and 10.000
+- The off points are 0 and 10.001
 
 ## Step 5: Devise test cases
 - T1:  `strStr("aabbcc", "d") == -1`
