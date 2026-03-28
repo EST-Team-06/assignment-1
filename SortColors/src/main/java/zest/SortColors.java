@@ -13,6 +13,14 @@ public class SortColors {
         if (nums == null) {
             throw new IllegalArgumentException("Input array cannot be null");
         }
+        if (nums.length == 0 || nums.length > 300) {
+            throw new IllegalArgumentException("Array length must be between 1 and 300");
+        }
+        for (int num : nums) {
+            if (num < 0 || num > 2) {
+                throw new IllegalArgumentException("Array elements must be 0, 1, or 2");
+            }
+        }
 
         int low = 0;               // boundary for 0s
         int mid = 0;               // current index
