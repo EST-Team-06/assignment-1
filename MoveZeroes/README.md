@@ -7,20 +7,20 @@ The operation must be performed in-place, meaning no additional arrays should be
 
 Inputs:
 
-**An integer array nums that may contain positive numbers, negative numbers, and zeroes.
+* An integer array nums that may contain positive numbers, negative numbers, and zeroes.
 
 Output:
 
-**The transformed array where all zero values appear at the end, and the original relative order of all non-zero elements is preserved.
+* The transformed array where all zero values appear at the end, and the original relative order of all non-zero elements is preserved.
 
 Behavior:
 
-**The method should iterate through the nums array and rearrange the elements in-place without creating a copy of the array.
+* The method should iterate through the nums array and rearrange the elements in-place without creating a copy of the array.
 
-**The method should handle edge cases such as an array containing only zeroes, no zeroes, multiple consecutive zeroes, and a single-element array.
+* The method should handle edge cases such as an array containing only zeroes, no zeroes, multiple consecutive zeroes, and a single-element array.
 
 #Example
 
-**Input: numbers = [0, 1, 0, 3, 12]
+* Input: numbers = [0, 1, 0, 3, 12]
 
-**Output:  [1, 3, 12, 0, 0]
+* Output:  [1, 3, 12, 0, 0]

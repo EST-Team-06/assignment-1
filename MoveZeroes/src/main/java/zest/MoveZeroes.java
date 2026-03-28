@@ -13,11 +13,14 @@ public class MoveZeroes {
         if (numbers == null) {
             throw new IllegalArgumentException("Array cannot be null");
         }
+        if (numbers.length == 0) {
+            throw new IllegalArgumentException("Array cannot be empty");
+        }
 
         int insertPosition = 0;
 
         // First pass: move all non-zero elements forward
-        for (int i = 0; i < numbers.length-1; i++) {
+        for (int i = 0; i < numbers.length; i++) {
             if (numbers[i] != 0) {
                 numbers[insertPosition] = numbers[i];
                 insertPosition++;
@@ -31,4 +34,13 @@ public class MoveZeroes {
         }
     }
 
+//    private static void test(int[] numbers) {
+//        moveZeroes(numbers);
+//        System.out.print(Arrays.toString(numbers) + "\n");
+//    }
+//
+//    public static void main(String[] args) {
+//        test(new int[] {1, 2, 0, 3});
+//        test(new int[] {3, 0, 1, 0});
+//    }
 }
