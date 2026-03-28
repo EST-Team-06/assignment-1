@@ -39,7 +39,11 @@ Possible classes of inputs:
 
 ## Step 4: Analyze boundaries
 - Allowed list length: 1 and 200
+  - The on points are 1 and 200
+  - The off points are 0 and 201
 - Allowed string length: 0 and 200
+  - The on points are 0 and 200
+  - The off points are -1 (impossible) and 201
 
 ## Step 5: Devise test cases
 - T1:  `longestCommonPrefix([""]) == """`
