@@ -11,13 +11,19 @@ public class AddBinary {
      * @throws IllegalArgumentException if a or b is null
      */
     public static String addBinary(String a, String b) {
-        if (a == null || b == null) {
+        if (a == null || b == null || a.isEmpty() || b.isEmpty()) {
             throw new IllegalArgumentException("Input strings cannot be null");
         }
 
         StringBuilder result = new StringBuilder();
         int i = a.length() - 1;
         int j = b.length() - 1;
+
+        if (i+1 > Math.pow(10, 4) || j+1 > Math.pow(10, 4)) {
+            throw new IllegalArgumentException("Input strings cannot be greater than 10^4");
+        }
+
+
         int carry = 0;
 
         while (i >= 0 || j >= 0) {
@@ -38,7 +44,20 @@ public class AddBinary {
             carry = sum / 2;
         }
 
+        if (carry != 0) {
+        result.append(carry);
+        }
+
         return result.reverse().toString();
     }
+
+//    public static void main(String[] args) {
+//        System.out.println(addBinary("1", "1"));
+//        System.out.println(addBinary("10", "1"));
+//        System.out.println(addBinary("11", "1"));
+//        System.out.println(addBinary("", "0"));
+//
+//
+//    }
 
 }
