@@ -15,6 +15,10 @@ public class LengthOfLastWord {
             throw new IllegalArgumentException("Input string cannot be null");
         }
 
+        if (s.length() == 0 || s.length() > 10000) {
+            throw new IllegalArgumentException("Input string must have a length between 1 and 10000");
+        }
+
         int length = 0;
         int i = s.length() - 1;
 
@@ -25,6 +29,9 @@ public class LengthOfLastWord {
 
         // Count characters of last word
         while (i >= 0 && s.charAt(i) != ' ') {
+            if (!isEnglishLetter(s.charAt(i))) {
+                throw new IllegalArgumentException("All input strings must be valid");
+            }
             length++;
             i--;
         }
@@ -32,4 +39,13 @@ public class LengthOfLastWord {
         return length;
     }
 
+    private static boolean isEnglishLetter(char c) {
+        return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+    }
+
+//    public static void main(String[] args) {
+//        System.out.println(lengthOfLastWord("foobar"));
+//        System.out.println(lengthOfLastWord("foo bar"));
+//        System.out.println(lengthOfLastWord("foo bar baz"));
+//    }
 }
