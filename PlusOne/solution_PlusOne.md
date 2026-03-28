@@ -91,7 +91,7 @@ Since our test suite already achieves 100& branch coverage, we don't have any pi
 We don't have any additional tests to derive as nothing in the source code is not already covered by the test suite.
 
 # Mutation Testing
-Mutation testing was performed using `mvn -f PlusOne/pom.xml org.pitest:pitest-maven:mutationCoverage`, which generated the following coverage report:
+Mutation testing was performed using `mvn -f pom.xml org.pitest:pitest-maven:mutationCoverage`, which generated the following coverage report:
 - Number of Classes: 1
 - Line Coverage: 93% (14/15)
 - Mutation Coverage: 100% (20/20)
