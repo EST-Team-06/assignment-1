@@ -11,29 +11,29 @@ If no profit can be achieved, the method should return 0.
 
 Inputs:
 
-**An integer array prices.
+* An integer array prices.
 
 Constraints:
 
-**1 ≤ prices.length ≤ 10^5
+* 1 ≤ prices.length ≤ 10^5
 
-**0 ≤ prices[i] ≤ 10^4
+* 0 ≤ prices[i] ≤ 10^4
 
 Output:
 
-**An integer representing the maximum profit achievable from one buy-sell transaction.
+* An integer representing the maximum profit achievable from one buy-sell transaction.
 
-**If no profitable transaction is possible, return 0.
+* If no profitable transaction is possible, return 0.
 
 Behavior:
 
-**The method should iterate through the array and determine the optimal buy and sell days such that the buy day occurs before the sell day.
+* The method should iterate through the array and determine the optimal buy and sell days such that the buy day occurs before the sell day.
 
-**The method must only allow one buy and one sell, ensuring that the buy occurs before the sell, and that the profit is maximized.
+* The method must only allow one buy and one sell, ensuring that the buy occurs before the sell, and that the profit is maximized.
 
-**The method should handle edge cases such as a single-day price array, strictly increasing prices, strictly decreasing prices, constant prices, and multiple potential profit opportunities.
+* The method should handle edge cases such as a single-day price array, strictly increasing prices, strictly decreasing prices, constant prices, and multiple potential profit opportunities.
 
-#Example
+Example
 
-**Input: prices = [7,1,5,3,6,4]
-**Output: 5
+* Input: prices = [7,1,5,3,6,4]
+* Output: 5
