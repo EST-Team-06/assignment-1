@@ -1,5 +1,6 @@
 # Ignore generated files
 .idea/codeStyles/
+.vscode/
 **/.idea/
 **/.jqwik-database
 **/target
