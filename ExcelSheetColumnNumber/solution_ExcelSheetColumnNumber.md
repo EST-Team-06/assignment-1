@@ -136,6 +136,19 @@
   * However, sum of ASCII does not deal well with edge cases, where the sum is not exceeded but the wrap still occured
     * E.g, `ZZZZAAA` would still pass and trigger integer underflow; since the sum does not care about the order of characters, whereas the column number does
 
+**Reflection on Partitions & Equivalence Classes**: 
+* While reviewing our tests before submission; we wondered if the equivalence classes placed here were perhaps an overkill. Perhaps, you do not have to partition based on string length but it is sufficient to distinguish between 1 letter and multi-letter input.
+* The core question is; can 2-letter and 3-letter inputs be considered "equivalent", that is, will the method behave the same way for both of them?
+* For specification-testing, we do not look at the code and have to think rationally if it makes sense for the method to behave the same way.
+  * Saying A-Z is an equivalence class makes sense because it is just incrementing the integer, A=1, B=2 and Z=26
+  * We can also safely argue that Z and AA must belong to different classes because it does not make naturally sense to go from Z to AA, the program changes behavior as soon we have more than 1 letter.
+  * The question is, do we have to keep checking this behavior change afterward. Is it enough to check it only once, when going from single to double or should we check it each time the length increases?
+  * Because as Z and AA are different, so are ZZ and AAA
+  * If we partition based on single and multiple characters, we would have two partitions but cannot be certain if all subpartitions inside the second partition are also equivalent.
+  * If you learn about the code later in structural testing; you can argue it is obvious that the inputs are equivalent but during specification testing, we avoid looking at the source code and just implement what we think makes sense.
+* We decided to leave original version and not retroactively remove the tests but we added this reflection to signal the TAs that we thought about it.
+
+
 # Structural testing
 ## Step 1: Perform specification based testing
 Refer to [Specification-based Testing](#specification-based-testing)
