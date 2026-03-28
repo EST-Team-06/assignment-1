@@ -26,7 +26,8 @@
 
 ### Input: `s`
 Possible classes of inputs:
-- Empty string
+- Null string (invalid input)
+- Empty string (invalid input)
 - String with invalid characters
 - String with some invalid characters
 - String with valid characters
@@ -45,19 +46,22 @@ Possible classes of inputs:
 
 ## Step 4: Analyze boundaries
 - The boundary values are at the minimum and maximum allowed input length: 1 and 10.000
+- The on points are 1 and 10.000
+- The off points are 0 and 10.001
 
 ## Step 5: Devise test cases
 - T1:  `lengthOfLastWord("") == IllegalArgumentException`
 - T2:  `lengthOfLastWord(".") == IllegalArgumentException`
 - T3:  `lengthOfLastWord("hello.world") == IllegalArgumentException`
 - T4:  `lengthOfLastWord("a"*10001) == IllegalArgumentException`
-- T5:  `lengthOfLastWord("foo") == 3`
-- T6:  `lengthOfLastWord("foo bar") == 3`
-- T7:  `lengthOfLastWord("foo bar  ") == 3`
-- T8:  `lengthOfLastWord("  foo bar") == 3`
-- T9:  `lengthOfLastWord("   ") == 0`
-- T10:  `lengthOfLastWord("hello w") == 1`
-- T11:  `lengthOfLastWord("hello world") == 5`
+- T5:  `lengthOfLastWord("a") == 1`
+- T6:  `lengthOfLastWord("foo") == 3`
+- T7:  `lengthOfLastWord("foo bar") == 3`
+- T8:  `lengthOfLastWord("foo bar  ") == 3`
+- T9:  `lengthOfLastWord("  foo bar") == 3`
+- T10: `lengthOfLastWord("   ") == 0`
+- T11: `lengthOfLastWord("hello w") == 1`
+- T12: `lengthOfLastWord("hello world") == 5`
 
 - I see that the T1-T4 fail, so there is no checks for invalid strings. So I add checks for T1 and T4: 
     ```java
@@ -77,7 +81,7 @@ Possible classes of inputs:
 
 ## Step 7: Use creativity and experience to augment test suite
 - I also wanted to test where `s` has multiple spaces between the words
-- T12:  `lengthOfLastWord("foo  bar   baz") == 5`
+- T13:  `lengthOfLastWord("foo  bar   baz") == 5`
 
 
 # Structural Testing
@@ -87,7 +91,7 @@ Possible classes of inputs:
 
 ## Step 2: Read the implementation, and understand the main coding decisions made by the developer
 - I see there is a check for rejecting null strings. I add a test case for that:
-- T13: `lengthOfLastWord("null") == IllegalArgumentException`
+- T14: `lengthOfLastWord("null") == IllegalArgumentException`
 
 ## Step 3: Run the devised test suite with a coverage tool
 - After running `mvn clean test` I got 83% branch coverage. I apparently only partially covered the English character check I added in T2 and T3
@@ -101,8 +105,8 @@ Possible classes of inputs:
 - Here I have 3 uncovered branches in the `(c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')` statement. I have to find 3 ASCII character covering all the regions
 - I realize I miss the following regions: "Z" < c < "a" and c > "z"
 - I add two cases covering these 
-- T14: `lengthOfLastWord("Hello_World") == IllegalArgumentException`
-- T15: `lengthOfLastWord("Hello}World") == IllegalArgumentException`
+- T15: `lengthOfLastWord("Hello_World") == IllegalArgumentException`
+- T16: `lengthOfLastWord("Hello}World") == IllegalArgumentException`
 - After that I got 100% branch coverage
 - I tried to reach 100% branch coverage here in this case because I realized it's easy and fast to cover, but I think these cases weren't necessarily needed 
 

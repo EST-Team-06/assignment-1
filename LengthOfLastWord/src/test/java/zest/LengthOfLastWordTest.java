@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.of;
-import static zest.LengthOfLastWord.lengthOfLastWord;;
+import static zest.LengthOfLastWord.lengthOfLastWord;
 
 public class LengthOfLastWordTest {
 
@@ -65,6 +65,7 @@ public class LengthOfLastWordTest {
 
     static Stream<Arguments> testCases() {
         return Stream.of(
+                of("a", 1),
                 of("foo", 3),
                 of("foo bar", 3),
                 of("  foo bar", 3),
