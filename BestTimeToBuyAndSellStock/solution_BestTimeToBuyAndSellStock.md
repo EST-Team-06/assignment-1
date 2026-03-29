@@ -62,12 +62,12 @@
 
 
 **Step 6: Implement concrete test cases with JUnit tests**
-* A team member implemented tests for AddBinary and I mainly mimic their prom.xml. So we will not copy-paste the documentation of how we learned how to use the tools everywhere. Refer to AddBinary for that.
+* A team member implemented tests for AddBinary and I mainly mimic their `pom.xml`. So we will not copy-paste the documentation of how we learned how to use the tools everywhere. Refer to AddBinary for that.
 * To learn how to generate an array with repeated numbers, I found: https://stackoverflow.com/a/14276506
-* After the first run, T5, T7.1 and T8.1 failed. Cases where the method should throw an error; because requirements forbid them, work.
+* After the first run, T5, T7.1 and T8.1 failed. Cases where the method should throw an error (because requirements forbid them) work.
 * Usually you should argue this with the product owner but since requirements were explicitly stated as constraint, I decide to implement them and enforce them.
   * For the upper limits this makes sense; we prevent misuse of the method by throwing errors when the limit is exceeded.
-  * For negative prices, you could argue they may occur in stock market (not a finance bro though)
+  * For negative prices, you could argue they may occur in stock market (I am not a finance bro though)
 
 * While fixing the code, I realized that while I check for empty list, I do not check for null list, so I added
 * T9: `maxProfit(null) == IllegalArgumentException`
@@ -94,7 +94,7 @@
 Refer to [Specification-based Testing](#specification-based-testing)
 
 ## Step 2: Read the implementation, and understand the main coding decisions made by the developer
-Read the code and it was relatively clear where we have branches and potential for errors / coverage issues.
+Read the code, and it was relatively clear where we have branches and potential for errors / coverage issues.
 
 ## Step 3: Run the devised test suite with a coverage tool
 * After running `mvn clean test`, I got 100% instruction coverage and 90% branch coverage
