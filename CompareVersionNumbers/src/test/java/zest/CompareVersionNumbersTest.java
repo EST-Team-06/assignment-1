@@ -31,11 +31,16 @@ public class CompareVersionNumbersTest {
     @ParameterizedTest
     @CsvSource({
             "., 1.0",
+            "1.0, .",
             "0, 1.0",
+            "1.0, 0",
             "0., 1.0",
+            "1.0, 0.",
             ".0, 1.0",
             "1.10, 1.0",
+            "1.0, 1.10",
             "-1.0, 1.0",
+            "1.0, -1.0",
             "hello, world",
             "hi.mom, hello.world",
     })
@@ -110,6 +115,15 @@ public class CompareVersionNumbersTest {
                 ()->{
                     compareVersion(leadingZero, "0.0");
                 }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(
+                ()->{
+                    compareVersion("0.0", regular);
+                }).isInstanceOf(IllegalArgumentException.class);
+
+        assertThatThrownBy(
+                ()->{
+                    compareVersion("0.0", leadingZero);
+                }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -121,6 +135,14 @@ public class CompareVersionNumbersTest {
         assertThatThrownBy(
                 ()->{
                     compareVersion("", "0.0");
+                }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(
+                ()->{
+                    compareVersion("0.0", null);
+                }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(
+                ()->{
+                    compareVersion("0.0", "");
                 }).isInstanceOf(IllegalArgumentException.class);
     }
 
