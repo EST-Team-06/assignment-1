@@ -30,6 +30,11 @@ public class BestTimeToBuyAndSellStockTest {
                     maxProfit(new int[]{-1});
                 }
         ).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(
+                ()->{
+                    maxProfit(new int[]{0, -1});
+                }
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
 
@@ -73,6 +78,11 @@ public class BestTimeToBuyAndSellStockTest {
         assertThatThrownBy(
                 ()->{
                     maxProfit(new int[] {0, unlimitedPrice});
+                }
+        ).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(
+                ()->{
+                    maxProfit(new int[] {unlimitedPrice});
                 }
         ).isInstanceOf(IllegalArgumentException.class);
     }

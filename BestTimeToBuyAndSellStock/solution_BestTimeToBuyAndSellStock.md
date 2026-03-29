@@ -111,13 +111,9 @@ Read the code, and it was relatively clear where we have branches and potential 
   }
   ```
 * This surprised me, as these cases should be covered by T5 and T8.1.
-* The report mentions 1 of 4 branches missed, so I assume it is referring to all 4 cases for `(A || B)`
-  * A=True, B=True
-  * A=True, B=False
-  * A=False, B=True
-  * A=False, B=False
-* T5 checks only A=True,B=False and T8.81 only A=False,B=True.
-* Putting each condition in a different if statement may raise branch coverage, but I do not believe it is that meaningful.
+* But then I realized that T5 does not check negative prices if for an input with more than 1 prices.
+* Similarly, T8.1 does not check for max price for more than 1 price
+* I accounted for those cases and got 100% branch coverage
 
 ## Step 5: Review the source code and derive additional tests using Step 4
 * I decided to not add additional tests because they seemed to be more inline to increasing a number rather than finding actual bugs.
