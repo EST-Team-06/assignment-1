@@ -119,6 +119,6 @@ Possible classes of inputs:
 
 - I looked at the survived mutants and saw that changing the conditional boundary of `s.length() > 10000` survived my test cases
 - So I added T16: `length[]()OfLastWord("a"*10000) == 10000`
-- After that 20 mutants were killed out of 23
-- The rest of the surviving mutants are due to changing the conditional boundary of ASCII characters. While I can add tests containing a, A, z, Z, I think this is not necessary. Because changing these limits would exclude these characters and break the intended logic which is unlikely to happen unintentionally 
+- After that 20 mutants were killed out of 23, resulting in a mutation coverage of 87%
+- The rest of the surviving mutants are due to changing the conditional boundary of ASCII characters. While I can add tests containing `a`, `A`, `z` and `Z`. I think this is not necessary to account for these because changing these limits would exclude these characters and break the intended logic which is unlikely to happen unintentionally
 - The class declaration was not covered by the tests, resulting in 96% line coverage
