@@ -16,10 +16,12 @@ public class AddBinary {
         }
 
         StringBuilder result = new StringBuilder();
-        int i = a.length() - 1;
-        int j = b.length() - 1;
+        int aLength = a.length();
+        int bLength = b.length();
+        int i = aLength - 1;
+        int j = bLength - 1;
 
-        if (i+1 > Math.pow(10, 4) || j+1 > Math.pow(10, 4)) {
+        if (aLength > Math.pow(10, 4) || bLength > Math.pow(10, 4)) {
             throw new IllegalArgumentException("Input strings cannot be greater than 10^4");
         }
 
@@ -50,14 +52,5 @@ public class AddBinary {
 
         return result.reverse().toString();
     }
-
-//    public static void main(String[] args) {
-//        System.out.println(addBinary("1", "1"));
-//        System.out.println(addBinary("10", "1"));
-//        System.out.println(addBinary("11", "1"));
-//        System.out.println(addBinary("", "0"));
-//
-//
-//    }
 
 }

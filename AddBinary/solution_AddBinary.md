@@ -120,8 +120,9 @@ We have read the implementation and found nothing out of the ordinary.
   * As for the branches I missed, it turns out that I am not checking all cases, that is:
     * `if (a == null || b == null || a.isEmpty() || b.isEmpty()) `
     * `if (i+1 > Math.pow(10, 4) || j+1 > Math.pow(10, 4))`
-  * I do not think it is worth implementing extra tests for those because I am using the `||` (short-circuiting OR) and it would not bring that much additional value in my opinion, as it is in the same condition.
-
+  * Initially, I did not think it was worth adding more tests for this because I thought I would have to swap inputs for everything.
+  * But when I went on with Mutation Testing, I realized it was worth doing it for special inputs. For regular addition, it was not necessary but for null, empty string, out of bounds, it made sense.
+  * So added one more line for each of those tests with the swapped input and got 100% branch coverage.
 
 ## Step 5: Review the source code and derive additional tests using Step 4
 I could not come up with more tests to implement.
@@ -136,7 +137,6 @@ I could not come up with more tests to implement.
 if (i+1 > Math.pow(10, 4) || j+1 > Math.pow(10, 4)) {
 ```
 * Changing the boundary will cause certain tests to pass, they should not.
-* Unsure if it is worth changing this, because the bound is given by the requirement. So a mutant where the bound is intentionally changed seems rather odd.
 * We can increase mutation coverage to 96% by doing:
 ```
 int aLength = a.length();
@@ -149,4 +149,26 @@ if (aLength > Math.pow(10, 4) || bLength > Math.pow(10, 4)) {
 }
 ```
 * By doing this, it prevents mutant from existing. The + cannot be replaced by "-" anymore. However, not sure if this is a good solution.
-* In my opinion, these two mutants are okay, as they shouldn't really occur in real life. 
+* The other mutant is due to changing `>` to `>=`. This would forbid strings with length exactly 10^4 from existing.
+* We can account for this by modifying the test that tests the longest input:
+* From
+```java
+    @Test
+    void checkBoundLongInput() {
+        String longString = "1".repeat((int) Math.pow(10, 4));
+        assertThat(addBinary("0", longString)).isEqualTo(longString);
+    }
+```
+* To
+```java
+    @Test
+    void checkBoundLongInput() {
+        String longString = "1".repeat((int) Math.pow(10, 4));
+        assertThat(addBinary("0", longString)).isEqualTo(longString);
+        assertThat(addBinary(longString, "0")).isEqualTo(longString);
+
+    }
+```
+* Because addition is commutative, there is no harm in adding the reverse case for these edge case inputs, so I did for the other tests as well.
+* This led to 100% branch coverage, improving structural testing.
+* This also led to 100% mutation coverage, improving mutation testing.
