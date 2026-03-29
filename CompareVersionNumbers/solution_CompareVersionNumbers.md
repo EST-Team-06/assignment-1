@@ -152,7 +152,7 @@ I took notice that I altered the code quite a bit while implementing tests; so I
   * 81% branch coverage
 
 ## Step 4: For each piece of code that is not covered understand why it was not tested
-* Based on my current experience, I already can guess that it may be due to my own code changes that involved many if-branches with OR conditions and I was right:
+* I already can guess that it may be due to my own code changes that involved many if-branches with OR conditions and I was right:
   ``` 
   if (version1 == null || version2 == null) {
   
