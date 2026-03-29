@@ -86,7 +86,7 @@ Refer to [Specification-based Testing](#specification-based-testing).
 We have read the implementation and found nothing out of the ordinary.
 
 ## Step 3: Run the devised test suite with a coverage tool
-Using the pre-bundled Code Coverage tool in IntelliJ IDEA, our test suite achieves 100% class, method, line and branch coverage.
+Using the pre-bundled Code Coverage tool in IntelliJ IDEA (or `mvn clean test`), our test suite achieves 100% line and branch coverage for method `sortColors`.
 
 ## Step 4: For each piece of code that is not covered understand why it was not tested
 Since our test suite already achieves 100& branch coverage, we don't have any piece of code that is not exercised by the test suite.
