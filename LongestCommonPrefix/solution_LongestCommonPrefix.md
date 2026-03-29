@@ -55,9 +55,9 @@ Possible classes of inputs:
 - T7:  `longestCommonPrefix(["foo", "f"]) == "f"`
 - T8:  `longestCommonPrefix(["foo", "foobar"]) == foo`
 - T9:  `longestCommonPrefix(["foo"]*200) == "foo"`
-- T10:  `longestCommonPrefix(["foo"]*201) == IllegalArgumentException`
-- T11:  `longestCommonPrefix(["a"*200]) == "a"*200`
-- T12:  `longestCommonPrefix(["a"*201]) == IllegalArgumentException`
+- T10: `longestCommonPrefix(["foo"]*201) == IllegalArgumentException`
+- T11: `longestCommonPrefix(["a"*200]) == "a"*200`
+- T12: `longestCommonPrefix(["a"*201]) == IllegalArgumentException`
 
 - I see that all the tests expecting IllegalArgumentException fail. So I add check for each case:
     ```java
@@ -110,7 +110,7 @@ Possible classes of inputs:
 # Mutation Testing
 
 - I ran: `mvn test-compile org.pitest:pitest-maven:mutationCoverage` and got
-  - 97% Line coverage (class declaration is not tested)
+  - 96% Line coverage (class declaration is not tested)
   - 91% Mutation coverage
   - Generated 22 mutants, killed 10
 
@@ -119,4 +119,5 @@ Possible classes of inputs:
 - I changed added a slightly adjusted version of T11: `longestCommonPrefix(["aaa", "a"*200]) == "aaa"`
 - After that I only have one surviving mutant
 - The remaining surviving mutant is due to changing the conditional boundary of ASCII characters. While I can add tests containing a and z, I think this is not necessary. Because changing these limits would exclude these characters and break the intended logic which is unlikely to happen unintentionally
-- The class declaration was not covered by the tests, resulting in 97% line coverage 
+- Thus mutation coverage improved to 96%
+- The class declaration was not covered by the tests, resulting in 96% line coverage 
