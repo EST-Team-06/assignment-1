@@ -15,7 +15,7 @@ addBinary("11", "1") == "100" (valid)
 **Step 2: Explore program if is not well-known**
 * In the book, the author implemented basic unit tests for this step but this is not required. 
 * I prefer to just run the program. I don't look at the code but just implement a main method and call the program with different inputs.
-* **Bug1**: `addBinary("1", "1")` returns `"0"`.
+* I found a bug: `addBinary("1", "1")` returns `"0"`.
   * Since we are tasked to fix the bug, I will fix it now and not later on. 
   * Since this is an IDE, I can use the debugger to figure out where the bug occurs.
   * I noticed that the carry is not added to the `result` array (StringBuilder). 
@@ -25,7 +25,6 @@ addBinary("11", "1") == "100" (valid)
 * By now I'm more familiar with what the method does and proceed to next step.
 
 **Step 3: Analyze properties of inputs and outputs, identify partitions**
-* Thanks to fixing **Bug1**, I have a rough idea of input properties to check for basic functionality
   * `a.length() == b.length() == result.length()` (all same length)
   * `a.length() == b.length() != result.length()` (input same length, output not)
   * `a.length() != b.length()` (input different length, 3 subcategories)
@@ -34,12 +33,12 @@ addBinary("11", "1") == "100" (valid)
     * `a.length() != b.length() != result.length()`
 
 * So we have 3 partitions, with 1 partition have 3 sub-partitions. They are non-equivalent, so testing them should test different parts of the code. 
-  * (NOTE, I only looked at the code for debugging the **Bug1**, I did not inspect the code in the detail, so maybe we see later if this is true or not via coverage!)
+  * (NOTE, I only looked at the code for debugging the bug I did not inspect further, so maybe we see later if this is true or not via coverage!)
 
 **Step 4: Analyze boundaries (on/off points)**
 * String length cannot be 0 and cannot be larger than 10^4, so we should test empty string and 10^4 just in case.
 * While the operation is on binary numbers, the input is string. So Java type checking is useless. We should check what the program does if some random string is passed as input.
-  * (We do not have to check for other types, like passing float / Integer, compiler will deal with that)
+  * (We do not have to check for other types, like passing float / integer, compiler will deal with that)
 
 **Step 5: Devise concrete test cases**
 * Since I'm bot a pro at Binary math, I use Python Interpreter to check that I'm doing stuff correctly.
@@ -109,9 +108,9 @@ Refer to [Specification-based Testing](#specification-based-testing)
 We have read the implementation and found nothing out of the ordinary.
 
 ## Step 3: Run the devised test suite with a coverage tool
-* While reading the book chapters, I also implemented all code the author implemented and learned how to use JaCoCo that way with the help of AI.
+* While reading the book chapters, I also implemented all code the author implemented and learned how to use Jacoco that way with the help of AI.
   * I assume that I do not have report this as it was in the past and not specifically to solve this task (I did not use AI for the assignment, I used AI to learn how to use Jacoco, so that's why I know it now!)
-    * The prompt was along the lines of: Give me what I have to add to `pom.xml` to make JaCoCo work
+    * The prompt was along the lines of: Give me what I have to add to `pom.xml` to make Jacoco work
   * I also cross-checked and found this post on StackOverflow: https://stackoverflow.com/a/79507359 (Which is the current one I'm using, not the AI generated one!)
   * So I run `mvn clean test`, it creates the report, which I can then view and check.
 
