@@ -71,7 +71,7 @@ Refer to [Specification-based Testing](#specification-based-testing)
 We have read the implementation and found nothing out of the ordinary.
 
 ## Step 3: Run the devised test suite with a coverage tool
-Using the pre-bundled Code Coverage tool in IntelliJ IDEA, our test suite achieves 100% class, 100% method, 100% line, but only 85% branch coverage.
+Using the pre-bundled Code Coverage tool in IntelliJ IDEA (or `mvn clean test`), our test suite achieves 100% line, but only 85% branch coverage for method `reverse`
 
 ## Step 4: For each piece of code that is not covered understand why it was not tested
 The conditions `(reversed == Integer.MAX_VALUE / 10 && digit > 7)` and `(reversed == Integer.MIN_VALUE / 10 && digit < -8)` are not exercised with a `true` outcome because they cannot be satisfied as long as the input is within the 32-bit integer range. The intention of these checks is to prevent overflow beyond `2'147'483'647` and `-2'147'483'648`. However, producing such cases would require inputs like `8'463'847'412` or `-9'463'847'412`, which are outside the valid `int` range.
@@ -86,4 +86,7 @@ Mutation testing was performed using `mvn -f pom.xml org.pitest:pitest-maven:mut
 - Mutation Coverage: 81% (13/16)
 - Test Strength: 81% (13/16)
 
-The mutation testing shows 81% mutation coverage and 81% test strength, meaning 3 mutations were not killed by the test suite. However, upon further inspection, just like in [Step 3](#step-3-run-the-devised-test-suite-with-a-coverage-tool), the problem is that it mutates the boundaries, e.g. `=> 7` instead of `>7`, but since this exact boundary cannot be covered because of the 32-bit integer range, the mutant is not killed.
+The mutation testing shows 81% mutation coverage and 81% test strength, meaning 3 mutations were not killed by the test suite. 
+* However, upon further inspection, there is a mutant that comes to be if an equality conditions (`==`) is negated (`!=`) and this is due to the problem seen in [Step 3](#step-3-run-the-devised-test-suite-with-a-coverage-tool). 
+  * It also mutates the boundaries, e.g. `=> 7` instead of `>7`, but since this exact boundary cannot be covered because of the 32-bit integer range, the mutant is not killed. 
+* Furthermore, we have mutants for `reversed > Integer.MAX_VALUE / 10` and `reversed < Integer.MIN_VALUE / 10`. This cannot be tested since MAX and MIN integer are not divisible by 10, so will not be integers.
