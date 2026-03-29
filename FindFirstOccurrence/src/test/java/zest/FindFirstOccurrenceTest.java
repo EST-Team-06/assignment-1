@@ -73,6 +73,7 @@ public class FindFirstOccurrenceTest {
                 of("a", "abc", -1),
                 of("a".repeat(9999) + "b", "b", 9999),
                 of("a".repeat(10000), "a", 0),
+                of("a", "a".repeat(10000), -1),
                 of("haystac", "stack", -1),
                 of("aystack", "hay", -1)
         );

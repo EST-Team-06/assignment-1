@@ -55,8 +55,4 @@ public class CompareVersionNumbers {
         return 0;
     }
 
-//    public static void main(String[] args) {
-//        System.out.println(compareVersion(".", "1.0"));
-//    }
-
 }

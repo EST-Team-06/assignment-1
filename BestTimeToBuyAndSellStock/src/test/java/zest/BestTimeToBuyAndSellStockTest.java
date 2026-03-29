@@ -30,6 +30,11 @@ public class BestTimeToBuyAndSellStockTest {
                     maxProfit(new int[]{-1});
                 }
         ).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(
+                ()->{
+                    maxProfit(new int[]{0, -1});
+                }
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
 
@@ -68,6 +73,7 @@ public class BestTimeToBuyAndSellStockTest {
     @Test
     void checkUpperPriceBound() {
         int limitPrice = (int) Math.pow(10, 4);
+        assertThat(maxProfit(new int[] {limitPrice})).isEqualTo(0);
         assertThat(maxProfit(new int[] {0, limitPrice})).isEqualTo(limitPrice);
         int unlimitedPrice = limitPrice + 1;
         assertThatThrownBy(
@@ -75,10 +81,16 @@ public class BestTimeToBuyAndSellStockTest {
                     maxProfit(new int[] {0, unlimitedPrice});
                 }
         ).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(
+                ()->{
+                    maxProfit(new int[] {unlimitedPrice});
+                }
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
     static Stream<Arguments> testCases() {
         return Stream.of(
+                of(new int[]{0}, 0),
                 of(new int[]{1}, 0),
                 of(new int[]{1, 5}, 4),
                 of(new int[]{5, 1}, 0),

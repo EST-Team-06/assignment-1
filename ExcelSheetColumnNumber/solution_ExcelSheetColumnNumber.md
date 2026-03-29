@@ -159,7 +159,7 @@ Refer to [Specification-based Testing](#specification-based-testing)
 * The essential part of the code was the loop which seemed correct to me.
 
 ## Step 3: Run the devised test suite with a coverage tool
-* I ran Jacoco and got:
+* I ran `mvn clean test` with Jacoco and got:
   * Line coverage 93%
   * Branch coverage 85%
 
@@ -183,7 +183,7 @@ Refer to [Specification-based Testing](#specification-based-testing)
 
 # Mutation testing
 * Refer to AddBinary to understand how Pitest was set up.
-* After running Pitest I got:
+* I ran: `mvn test-compile org.pitest:pitest-maven:mutationCoverage` and got:
   * Line coverage: 93%
   * Mutation score: 94%
 * The line coverage is not 100% because the constructor was not used, which is fine.

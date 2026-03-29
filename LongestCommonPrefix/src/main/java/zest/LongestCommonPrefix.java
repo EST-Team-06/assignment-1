@@ -52,9 +52,4 @@ public class LongestCommonPrefix {
         }
         return false;
     }
-
-//    public static void main(String[] args) {
-//        System.out.println(longestCommonPrefix(new String[] {"foobar", "foo"}));
-//        System.out.println(longestCommonPrefix(new String[] {"foo", "bar"}));
-//    }
 }

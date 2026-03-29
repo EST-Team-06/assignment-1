@@ -92,7 +92,7 @@ Possible classes of inputs:
 - T17: `strStr("haystack", "null") == IllegalArgumentException`
 
 ## Step 3: Run the devised test suite with a coverage tool
-- I got 100% branch coverage with JaCoCo
+- I ran `mvn clean test` for JaCoCo and got 100% branch coverage
 
 ## Step 4: For each piece of code that is not covered understand why it was not tested
 - Since I got 100% branch coverage, it's not applicable
@@ -105,6 +105,13 @@ Possible classes of inputs:
 
 - I ran: `mvn test-compile org.pitest:pitest-maven:mutationCoverage` and got
   - 96% Line coverage (class signature is not tested)
-  - 100% Mutation coverage
-  - Generated 15 mutants, killed 15
+  - 95% Mutation coverage
+  - Generated 21 mutations, killed 20
 - The class declaration was not covered by the tests, resulting in 96% line coverage 
+- The mutant was in:
+```
+ if (haystack.length() > 10000 || needle.length() > 10000) {
+```
+  - To fix it, I added one more test case: `of("a", "a".repeat(10000), -1),
+  - Ensures that program also works if needle length = 10k; requirements do not forbid this.
+  - This raised mutation coverage to 100%

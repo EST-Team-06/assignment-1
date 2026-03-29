@@ -152,7 +152,7 @@ I took notice that I altered the code quite a bit while implementing tests; so I
   * 81% branch coverage
 
 ## Step 4: For each piece of code that is not covered understand why it was not tested
-* Based on my current experience, I already can guess that it may be due to my own code changes that involved many if-branches with OR conditions and I was right:
+* I already can guess that it may be due to my own code changes that involved many if-branches with OR conditions and I was right:
   ``` 
   if (version1 == null || version2 == null) {
   
@@ -165,8 +165,10 @@ I took notice that I altered the code quite a bit while implementing tests; so I
   if (num1 < 0 || num1 > 9 || num2 < 0 || num2 > 9) {
   ```
   * All these conditions are used for input validation
-  * I do not see a net benefit for implementing tests that cover all cases simply to achieve 100% branch coverage.
-
+  * Initially, I did not see a benefit for matching all of them, but then I thought again: Is it really difficult to get them?
+  * No, I can just copy-paste previous test-cases and swap the inputs and obtain 100% coverage. It may see excessive but if you think about our main goal, catching bugs, it makes sense.
+  * Suppose someone refactors the code and somehow ends fiddling with these, our tests should be able to catch this.
+  * I accounted for all these cases and got a branch coverage of 100%
 
 ## Step 5: Review the source code and derive additional tests using Step 4
 * Since input validation is tight and there is not really a benefit to exercise all possible wrong inputs only to check that input validation I implemented works correctly, I decided to not implement further tests.
@@ -177,29 +179,17 @@ I took notice that I altered the code quite a bit while implementing tests; so I
 * Refer to AddBinary to understand how Pitest was set up.
 * I ran `mvn test-compile org.pitest:pitest-maven:mutationCoverage`
   * Line coverage 95% (21/22)
-  * Mutation score 88% (30 / 34 mutants killed)
-``` 
-if (version1.length() > 500 || version2.length() > 500) {
-
-for (int i = 0; i < maxLength; i++) {
-
-if (num1 < 0 || num1 > 9 || num2 < 0 || num2 > 9) {
-```
-* The valid digit check we can actually test by adding a test just checks all integers 0 to 9
-* Added that tests and re-ran Pitest
-  * Line coverage 95% (21/22)
-  * Mutation score 94% (32 / 34 mutants killed)
-* The version length > 500 check lets mutants survive because we only test with 500 on one side but not the other
-  * The condition is valid, it makes sense why mutants would fail
-  * Implementing tests to kill the mutant is relatively easy, we just copy two lines and swap the inputs
-* I re-ran Pitest
-  * Line coverage 95% (21/22)
   * Mutation score 97% (33 / 34 mutants killed)
-* As for the for-loop, I do not think it's worth testing because if `<=` is used, that can lead to index out of bounds.
-  * But it does not because we have a ternary operation
-  ```
-  int num1 = (i < v1Parts.length) ? Integer.parseInt(v1Parts[i]) : 0;
-  ```
-  * Which gives us a guarantee that `i` will not be beyond the index. 
-  * I do not know why Pitest didn't mutate the ternary, perhaps too complex for it.
-  * I decide to leave as the ternary seems safe enough in my opinion.
+* The mutant that survived was for this line:
+```
+for (int i = 0; i < maxLength; i++)
+```
+* So if `i=maxLength`, there is no test that fails.
+* Checking what this does in the code, we see:
+```  
+int num1 = (i < v1Parts.length) ? Integer.parseInt(v1Parts[i]) : 0;
+int num2 = (i < v2Parts.length) ? Integer.parseInt(v2Parts[i]) : 0;
+```
+* Meaning, before we access indices with `i`, we first check if it is smaller than `length`
+* The program will behave the same way as before and not trigger any crashes thanks to this ternary.
+* I decided to leave this mutant be.

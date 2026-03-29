@@ -31,6 +31,10 @@ public class AddBinaryTest {
                 ()->{
                     addBinary("", "0");
                 }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(
+                ()->{
+                    addBinary("0", "");
+                }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -38,6 +42,10 @@ public class AddBinaryTest {
         assertThatThrownBy(
                 ()->{
                     addBinary(null, "0");
+                }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(
+                ()->{
+                    addBinary("0", null);
                 }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -48,12 +56,18 @@ public class AddBinaryTest {
                 ()->{
                     addBinary("0", longString);
                 }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(
+                ()->{
+                    addBinary(longString, "0");
+                }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void checkBoundLongInput() {
         String longString = "1".repeat((int) Math.pow(10, 4));
         assertThat(addBinary("0", longString)).isEqualTo(longString);
+        assertThat(addBinary(longString, "0")).isEqualTo(longString);
+
     }
 
     @Test
@@ -64,6 +78,8 @@ public class AddBinaryTest {
         longOutputValidArr[0] = '1';
         longOutputValid = String.valueOf(longOutputValidArr);
         assertThat(addBinary("1", longInputValid)).isEqualTo(longOutputValid);
+        assertThat(addBinary(longInputValid, "1")).isEqualTo(longOutputValid);
+
     }
 
 

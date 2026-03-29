@@ -62,12 +62,12 @@
 
 
 **Step 6: Implement concrete test cases with JUnit tests**
-* A team member implemented tests for AddBinary and I mainly mimic their prom.xml. So we will not copy-paste the documentation of how we learned how to use the tools everywhere. Refer to AddBinary for that.
+* A team member implemented tests for AddBinary and I mainly mimic their `pom.xml`. So we will not copy-paste the documentation of how we learned how to use the tools everywhere. Refer to AddBinary for that.
 * To learn how to generate an array with repeated numbers, I found: https://stackoverflow.com/a/14276506
-* After the first run, T5, T7.1 and T8.1 failed. Cases where the method should throw an error; because requirements forbid them, work.
+* After the first run, T5, T7.1 and T8.1 failed. Cases where the method should throw an error (because requirements forbid them) work.
 * Usually you should argue this with the product owner but since requirements were explicitly stated as constraint, I decide to implement them and enforce them.
   * For the upper limits this makes sense; we prevent misuse of the method by throwing errors when the limit is exceeded.
-  * For negative prices, you could argue they may occur in stock market (not a finance bro though)
+  * For negative prices, you could argue they may occur in stock market (I am not a finance bro though)
 
 * While fixing the code, I realized that while I check for empty list, I do not check for null list, so I added
 * T9: `maxProfit(null) == IllegalArgumentException`
@@ -94,7 +94,7 @@
 Refer to [Specification-based Testing](#specification-based-testing)
 
 ## Step 2: Read the implementation, and understand the main coding decisions made by the developer
-Read the code and it was relatively clear where we have branches and potential for errors / coverage issues.
+Read the code, and it was relatively clear where we have branches and potential for errors / coverage issues.
 
 ## Step 3: Run the devised test suite with a coverage tool
 * After running `mvn clean test`, I got 100% instruction coverage and 90% branch coverage
@@ -111,13 +111,9 @@ Read the code and it was relatively clear where we have branches and potential f
   }
   ```
 * This surprised me, as these cases should be covered by T5 and T8.1.
-* The report mentions 1 of 4 branches missed, so I assume it is referring to all 4 cases for `(A || B)`
-  * A=True, B=True
-  * A=True, B=False
-  * A=False, B=True
-  * A=False, B=False
-* T5 checks only A=True,B=False and T8.81 only A=False,B=True.
-* Putting each condition in a different if statement may raise branch coverage, but I do not believe it is that meaningful.
+* But then I realized that T5 does not check negative prices if for an input with more than 1 prices.
+* Similarly, T8.1 does not check for max price for more than 1 price
+* I accounted for those cases and got 100% branch coverage
 
 ## Step 5: Review the source code and derive additional tests using Step 4
 * I decided to not add additional tests because they seemed to be more inline to increasing a number rather than finding actual bugs.
@@ -139,6 +135,9 @@ if (profit > maxProfit) {
 * I assume if certain operators are flipped, the tests will fail. 
 * In all cases, PitTest reports that changing conditional boundary did not trigger test failures.
 * For the condition wit `minPrice` and `maxPrice`, changing the condition indeed does not have an impact and I think that is fine.
-  * The only consequence would be a re-assignment but the method behaves correctly.
+  * The only consequence would be a re-assignment but the method will behave correctly.
+  * Depending on who you ask, this could be still something that we do not want as it is an additional operation done by the program, although it does not have to.
+  * However, I am unable to come up with a smart enough test that can track what program does at all time. It feels like this leaves the realm of this course; since it is less about bugs and more about performance.
 * Changing the conditional boundary for lower and upper limit will make cases where 0 and 10^4 are used fail in a single element list fail.
-  * This should indeed not happen. However, since single element lists always return 0 and this is tested, I think it is actually fine.
+  * To fix this, we simply add cases where the list of prices only contains 0 or 10^4. 
+  * That raises mutation coverage to 90%
