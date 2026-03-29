@@ -135,6 +135,9 @@ if (profit > maxProfit) {
 * I assume if certain operators are flipped, the tests will fail. 
 * In all cases, PitTest reports that changing conditional boundary did not trigger test failures.
 * For the condition wit `minPrice` and `maxPrice`, changing the condition indeed does not have an impact and I think that is fine.
-  * The only consequence would be a re-assignment but the method behaves correctly.
+  * The only consequence would be a re-assignment but the method will behave correctly.
+  * Depending on who you ask, this could be still something that we do not want as it is an additional operation done by the program, although it does not have to.
+  * However, I am unable to come up with a smart enough test that can track what program does at all time. It feels like this leaves the realm of this course; since it is less about bugs and more about performance.
 * Changing the conditional boundary for lower and upper limit will make cases where 0 and 10^4 are used fail in a single element list fail.
-  * This should indeed not happen. However, since single element lists always return 0 and this is tested, I think it is actually fine.
+  * To fix this, we simply add cases where the list of prices only contains 0 or 10^4. 
+  * That raises mutation coverage to 90%
