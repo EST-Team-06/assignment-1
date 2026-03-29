@@ -118,8 +118,8 @@ We have read the implementation and found nothing out of the ordinary.
 * Based on the report, I got 100% Line coverage and 86% Branch coverage on the `addBinary` method
   * I assume I do not have to look at the class, just the method. As we only implement the tests for the method.
   * As for the branches I missed, it turns out that I am not checking all cases, that is:
-    * a = null OR b = null OR a.isEmpty() OR b.isEmpty()
-    * i+1 > Math.pow(10,4) OR j+1 > Math.pow(10,4)
+    * `if (a == null || b == null || a.isEmpty() || b.isEmpty()) `
+    * `if (i+1 > Math.pow(10, 4) || j+1 > Math.pow(10, 4))`
   * I do not think it is worth implementing extra tests for those because I am using the `||` (short-circuiting OR) and it would not bring that much additional value in my opinion, as it is in the same condition.
 
 
